@@ -44,3 +44,4 @@ document.addEventListener('DOMContentLoaded', function() {
   </footer>`;
     document.body.appendChild(footer);
 }); 
+
