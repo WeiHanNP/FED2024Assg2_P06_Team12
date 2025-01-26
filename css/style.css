@@ -6,3 +6,80 @@
       margin-left: 10px;
     }
 }
+
+/* bump.html */
+.split {
+  padding: 1%;
+  flex-grow: inherit;
+  flex-basis: 49%;
+  align-content: center;
+}
+
+.container {
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+  height: auto;
+  justify-content: space-evenly;
+}
+
+.flex-item {
+  /* padding: 1%; */
+  flex-grow: 1;
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-button{
+  border-radius: 10px;
+  background-color:#e9d072;
+  border-color: #e9d072;
+  height: 70px;
+  width: 80%;
+  font-size: 45px;
+  margin: 4.5%;
+}
+
+.sub-button{
+  border-radius: 10px;
+  background-color:#fcdec8;
+  border-color: #fcdec8;
+  height: 50px;
+  width: 80%;
+  font-size: 27px;
+  margin: 2%;
+}
+
+.bottom-right {
+  margin-left: 90%;
+  font-size: 30px;
+  padding: 1%;
+  background-color: #683b2b;
+  color: white;
+  border-radius: 10px;
+  width: 18%;
+}
+
+.card{
+  margin: 1%;
+}
+
+@media (max-width: 576px) {
+  .split {
+    flex-basis: 100%;
+  }
+  .main-button{
+    height: 50px;
+    font-size: 30px;
+  }
+  .sub-button{
+    height: 40px;
+    font-size: 20px;
+  }
+  .bottom-right {
+    margin-left: 80%;
+    font-size: 20px;
+  }
+}
