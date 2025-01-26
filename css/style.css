@@ -100,6 +100,25 @@
   display: none;
 }
 
+.ad-box {
+  height: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.ad-box img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.category-selector {
+    max-width: 800px; /* Limit the width */
+    margin: 0 auto;   /* Center it horizontally */
+    text-align: center; /* Center-align content */
+}
 
 
 @media (max-width: 576px) {
