@@ -6,34 +6,34 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="container p-4">
       <div class="row">
         <div class="col-lg-3 col-md-6 mb-4">
-          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">shopping online</h5>
+          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">Shopping Online</h5>
           <ul class="list-unstyled mb-0">
             <li class="mb-1">
-              <a href="#!" style="color: #4f4f4f;">frequently asked questions</a>
+              <a href="#!" style="color: #4f4f4f;">Frequently asked questions</a>
             </li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-6 mb-4">
-          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">git cards</h5>
+          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">Gift Cards</h5>
           <ul class="list-unstyled mb-0">
             <li class="mb-1">
-              <a href="#!" style="color: #4f4f4f;">frequently asked questions</a>
+              <a href="#!" style="color: #4f4f4f;">Buy a gift card</a>
             </li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-6 mb-4">
-          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">company</h5>
+          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">Company</h5>
           <ul class="list-unstyled mb-0">
             <li class="mb-1">
-              <a href="#!" style="color: #4f4f4f;">buy a gift card</a>
+              <a href="#!" style="color: #4f4f4f;">Find out more about MokeSell</a>
             </li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-6 mb-4">
-          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">diamond club</h5>
+          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">Diamond Club</h5>
           <ul class="list-unstyled mb-0">
             <li class="mb-1">
-              <a href="#!" style="color: #4f4f4f;">registration</a>
+              <a href="#!" style="color: #4f4f4f;">Registration</a>
             </li>
           </ul>
         </div>
