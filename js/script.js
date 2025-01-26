@@ -168,14 +168,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
-var cardDeck = document.getElementById('card-deck');
-cardDeck.innerHTML = '<p>Hello World</p>';
-cardDeck.style.width = '100%';
-cardDeck.style.height = '100%';
-cardDeck.style.backgroundColor = 'red';
-document.body.appendChild(cardDeck);
-
 function listing() {
   fetch("https://mokesell1-2729.restdb.io/rest/listing", {
     method: 'GET',
@@ -210,3 +202,27 @@ function listing() {
   })
   .catch(error => console.error('Error:', error));
 };
+
+//bump page
+window.addEventListener('resize', function() {
+  var list = document.getElementById('list');
+  if (window.innerWidth < 576) {
+    list.style.display = 'none';
+  } else {
+    list.style.display = 'block';
+    
+  }
+});
+
+function showBumpMenu() {
+  var list = document.getElementById('list');
+  list.style.display = 'block';
+}
+
+
+// Initial check
+if (window.innerWidth < 576) {
+  document.getElementById('list').style.display = 'none';
+}
+
+
