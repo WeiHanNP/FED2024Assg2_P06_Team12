@@ -35,7 +35,7 @@
     h1 {
       margin-left: 10px;
     }
-}
+
 
 /* bump.html */
 .split {
@@ -95,6 +95,12 @@
 .card{
   margin: 1%;
 }
+#click-bump{
+  margin: 1%;
+  display: none;
+}
+
+
 
 @media (max-width: 576px) {
   .split {
@@ -112,5 +118,9 @@
     margin-left: 80%;
     font-size: 20px;
   }
+  #click-bump{
+    display: block;
+  }
+  
 }
 
