@@ -179,10 +179,15 @@ function listing() {
   })
   .then(response => response.json())
   .then(data => {
+    var productDiv = document.getElementById('card-deck');
+    productDiv.className = 'card-deck';
+    productDiv.innerHTML = ''; // Clear previous listings
+
     data.forEach(product => {
-      var productDiv = document.getElementById('card-deck');
-      
-      productDiv.innerHTML = `<div class="card" style="width: 18rem;">
+      var card = document.createElement('div');
+      card.className = 'card';
+      card.style.width = '18rem';
+      card.innerHTML = `
         <img src="${product.photo}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">${product.name}</h5>
@@ -191,8 +196,8 @@ function listing() {
           <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
           <button id="like-${product._id}" class="btn btn-primary">Like</button>
         </div>
-      </div>`;
-      document.body.appendChild(productDiv);
+      `;
+      productDiv.appendChild(card);
 
       document.getElementById(`like-${product._id}`).addEventListener('click', function() {
         // Add product to liked array of the user

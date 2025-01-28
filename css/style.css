@@ -20,7 +20,9 @@
   height: 100%;
   
   }
-
+.card-deck{
+  display : flex;
+}
 
 
 /* nav{
