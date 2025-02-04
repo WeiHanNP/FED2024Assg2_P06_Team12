@@ -1,90 +1,67 @@
 const APIKEY = "6793b4d81128e05c4b6abe6c";
 
+//userinfo for top of the page
 document.addEventListener('DOMContentLoaded', function() {
-    var footer = document.createElement('footer');
-    footer.innerHTML = `<footer style="background-color: #ffede7;">
-    <div class="container p-4">
-      <div class="row">
-        <div class="col-lg-3 col-md-6 mb-4">
-          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">Shopping Online</h5>
-          <ul class="list-unstyled mb-0">
-            <li class="mb-1">
-              <a href="#!" style="color: #4f4f4f;">Frequently asked questions</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">Gift Cards</h5>
-          <ul class="list-unstyled mb-0">
-            <li class="mb-1">
-              <a href="#!" style="color: #4f4f4f;">Buy a gift card</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">Company</h5>
-          <ul class="list-unstyled mb-0">
-            <li class="mb-1">
-              <a href="#!" style="color: #4f4f4f;">Find out more about MokeSell</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-          <h5 class="mb-3" style="letter-spacing: 2px; color: #7f4722;">Diamond Club</h5>
-          <ul class="list-unstyled mb-0">
-            <li class="mb-1">
-              <a href="#!" style="color: #4f4f4f;">Registration</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      <a class="text-dark" href="#"> MokeSell</a>
-    </div>
-    <!-- Copyright -->
-  </footer>`;
-    document.body.appendChild(footer);
+  let userinfo = document.getElementsByClassName('userinfo');
+  if (userinfo.length > 0) {
+    var userid = localStorage.getItem('userid');
+    var username = localStorage.getItem('username');
+    if (userid) {
+      userinfo[0].innerHTML = `<h5  style="text-align: end;">Welcome ${username}</h5>`;
+    } else {
+      userinfo[0].innerHTML = `<h5  style="text-align: end;"><a href="login.html">Login</a></h5>`;
+    }
+  let logoutBtn = document.createElement('button');
+  logoutBtn.innerHTML = 'Logout';
+  logoutBtn.addEventListener('click', function() {
+    localStorage.removeItem('userid');
+    localStorage.removeItem('username');
+    window.location.href = 'index.html';
+  });
+  userinfo[0].appendChild(logoutBtn);
+  }
+  if (!localStorage.getItem('userid')) {
+    logoutBtn.style.display = 'none';
+  }
 });
+
+
+
 
 // start of login and signup pages
 
 // signup form (when user clicks on sign up)
 // 1. change the button text to 'Sign Up'
 // 2. add a confirm password field
+
 function signupform() {
-    var signupDiv = document.getElementById('signup');
-    
-    signupDiv.innerHTML = `<div data-mdb-input-init class="form-outline form-white mb-4">
-      <input type="password" id="typePasswordY" class="form-control form-control-lg" />
-      <label class="form-label" for="typePasswordY">Confirm Password</label> 
-      </div>`;
-    
-    var signup = document.getElementsByClassName('btn-lg')
-    signup[0].innerHTML = 'Sign Up';
-    signup[0].id = 'sign-up';
-
-    var hide = document.getElementById('hideSignup');
-    hide.style.display = 'none';
+  let form = document.getElementById('cfmpassword');
+  form.style.display = 'block';
+  document.getElementById('signup-btn').innerHTML = 'Sign Up';
 }
-
-
 // sign up form (when user clicks on sign up)
 // check if the password and confirm password fields match
 // if they do, sign up the user (call the signup function)
 // if they don't, alert the user that the passwords do not match
-function loginSignup(){
+document.getElementById('signup-btn').addEventListener('click', function() {
     var username = document.getElementById('typeUsername');
     var passwordX = document.getElementById('typePasswordX');
     var passwordY = document.getElementById('typePasswordY');
-
-    if(passwordX.value != passwordY.value){
-        alert('Passwords do not match');
+    if (passwordX.value == "" || username.value == "") {
+      alert('Please fill in all fields');
+    }
+    if (passwordY.value == ""){
+      alert("here");
+      login(username.value,passwordX.value);
     }
     else{
-        signup(username.value,passwordY.value);//sign up the user
+      if (passwordX.value == passwordY.value) {
+        signup(username.value,passwordX.value);
+      } else {
+        alert('Passwords do not match');
+      }
     }
-}
+});
 
 // sign up the user
 // 1. get the username and password from the form
@@ -96,8 +73,8 @@ function signup(username,password) {
   let jsondata = {
     "username": username,
     "password": password,
-    "liked": [0],
-    "followed": [0],
+    "liked": [0], //to keep listing ID
+    "followed": [0], //to keep other member ID
   };
 
   let settings = {
@@ -120,39 +97,51 @@ function signup(username,password) {
     console.log(data);
     document.getElementById('signup').innerHTML = 'Sign Up';
   });
-  loggedIn();
+
+  
+  login(username,password);
 }
 // log the user in
 // 1. get the username and password from the form
 // 2. make a GET request to the database to get all the users
 // 3. loop through the users and check if the username and password match
 // 4. if they do, alert the user that they are logged in
-function login() {
-  var username = document.getElementById('typeUsername');
-  var password = document.getElementById('typePasswordX');
-
+function login(username, password) {
   fetch("https://mokesell1-2729.restdb.io/rest/member", {
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/json',
-          "x-apikey": APIKEY,
-          "cache-control": "no-cache"
-      }
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY,
+      "cache-control": "no-cache"
+    }
   })
   .then(response => response.json())
   .then(data => {
-      data.forEach(user => {
-          if(user.username == username.value && user.password == password.value) {
-              alert('Logged in');
-          }
-      });
+    let userFound = false;
+    data.forEach(user => {
+      if (user.username === username && user.password === password) {
+        alert('Logged in');
+        let userid = user._id;
+        let serverUsername = user.username;
+        loggedIn(userid, serverUsername);
+        userFound = true;
+      }
+    });
+    if (!userFound) {
+      alert('Invalid username or password');
+    }
   })
   .catch(error => console.error('Error:', error));
 }
 
 
-//save the user to the local storage (not done)
-function loggedIn(){
+//save the user to the local storage
+function loggedIn(userid,username) {
+  localStorage.setItem('userid', userid);
+  localStorage.setItem('username', username);
+  alert(userid);
+  alert(username);
+  window.location.href = 'index.html';
 }
 // end of login and signup pages
 
@@ -166,8 +155,6 @@ function loggedIn(){
 document.addEventListener('DOMContentLoaded', function() {
   listing();
 });
-
-
 function listing() {
   fetch("https://mokesell1-2729.restdb.io/rest/listing", {
     method: 'GET',
@@ -179,25 +166,28 @@ function listing() {
   })
   .then(response => response.json())
   .then(data => {
-    var productDiv = document.getElementById('card-deck');
-    productDiv.className = 'card-deck';
+    var productDiv = document.getElementById('card-container');
     productDiv.innerHTML = ''; // Clear previous listings
-
-    data.forEach(product => {
-      var card = document.createElement('div');
-      card.className = 'card';
-      card.style.width = '18rem';
-      card.innerHTML = `
-        <img src="${product.photo}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">${product.name}</h5>
-          <p class="card-text">${product.description}</p>
-          <p class="card-text">$${product.listprice}</p>
-          <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
-          <button id="like-${product._id}" class="btn btn-primary">Like</button>
+    let row;
+    data.forEach((product, index) => {
+      if (index % 4 === 0) {
+        row = document.createElement('div');
+        row.className = 'row';
+        productDiv.appendChild(row);
+      }
+      let col = document.createElement('div');
+      col.className = 'col-lg-3 col-md-6 mb-4 card';
+      col.innerHTML = `  
+          <img src="${product.image}" class="card-img-top" alt="${product.name}">
+          <div class="card-body">
+            <h5 class="card-title">${product.name}</h5>
+            <p class="card-text">${limitText(product.description, 10)}</p>
+            <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
+            <button id="like-${product._id}" class="btn btn-primary">Like</button>
+          
         </div>
       `;
-      productDiv.appendChild(card);
+      row.appendChild(col);
 
       document.getElementById(`like-${product._id}`).addEventListener('click', function() {
         // Add product to liked array of the user
@@ -225,9 +215,11 @@ function showBumpMenu() {
 }
 
 
-// Initial check
+//Initial check
 if (window.innerWidth < 576) {
   document.getElementById('list').style.display = 'none';
 }
+
+
 
 

@@ -14,6 +14,49 @@
   
 }
 
+
+
+.card-container{
+    display: flex;
+    justify-content:flex-start; /* Space between cards */
+    
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+      
+}
+
+.card-container .card{
+  flex: 1 1 calc(23% - 20px); /* Each card takes 25% width minus gap */
+  max-width: calc(23% - 20px); /* Ensures 4 cards per row */
+  box-sizing: border-box; /* Include padding and border in size */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .card-container .card {
+    flex: 1 1 calc(50% - 20px); /* 2 cards per row on smaller screens */
+    max-width: calc(50% - 20px);
+  }
+}
+@media (max-width: 480px) {
+  .card-container .card {
+    flex: 1 1 100%; /* 1 card per row on very small screens */
+    max-width: 100%;
+  }
+}
+
+
+
+
+
+
 /*login page*/
 .gradient-custom {
   background: #d49e8d;
@@ -145,3 +188,91 @@
   
 }
 
+
+/*Footer*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+
+.footer-section {
+  flex: 1;
+  padding: 10px;
+  min-width: 200px;
+}
+
+.footer-section h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.footer-section p, .footer-section ul {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 5px;
+}
+
+.footer-section ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  color: #f1c40f;
+}
+
+.footer-bottom {
+  background-color: #222;
+  padding: 10px 0;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+  .footer-content {
+      flex-direction: column;
+      margin-bottom: 20px;
+  }
+
+  .footer-section {
+      text-align: left;
+     
+  }
+
+  .footer-section:last-child {
+      margin-bottom: 10px;
+  }
+  .footer-section h2 {
+      font-size: 1.2rem;
+
+  }
+}

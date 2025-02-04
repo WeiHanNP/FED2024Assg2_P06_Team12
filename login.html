@@ -7,75 +7,120 @@
     <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</html>
+<style>
+  .divider:after, .divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+
+
+
+
+.vh-100{
+    margin-bottom: 7 0px;
+    flex : 1;
+}
+
+#cfmpassword{
+  display: none;
+}
+
+</style>
+
+    </html>
 <body class = "login-page">
-    <header>
-        <title><i>Login</i></title>
-        <div class = "header-space">
-            
+  <div class = "header-space userinfo">
+    <h5 style="text-align: end;"></h5>
+</div>
+  <section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+            class="img-fluid" alt="Sample image">
         </div>
-        <div style = "height: 2px;">
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <form>
+            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+              <p class="lead fw-normal mb-0 me-3">Sign in</p>
+              
+            </div>
+  
+            <div class="divider d-flex align-items-center my-4">
+              <p class="text-center fw-bold mx-3 mb-0"></p>
+            </div>
+  
+            <!-- USername input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+              <input type="text" id="typeUsername" class="form-control form-control-lg"
+                placeholder="Username" />
+              <label class="form-label" for="form3Example3">Username</label>
+            </div>
+  
+            <!-- Password input -->
+            <div data-mdb-input-init class="form-outline mb-3">
+              <input type="password" id="typePasswordX" class="form-control form-control-lg"
+                placeholder="Enter password" />
+              <label class="form-label" for="form3Example4">Password</label>
+            </div>
+            <div id = "cfmpassword"> 
+            <div data-mdb-input-init class="form-outline mb-3">
+              <input type="password" id="typePasswordY" class="form-control form-control-lg"
+                placeholder="Comfirm password" />
+              <label class="form-label" for="form3Example4">Comfirm Password</label>
+            </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+
+            </div>
+  
+            <div class="text-center text-lg-start mt-4 pt-2">
+              <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" id = "signup-btn" 
+                style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+              <p class="small fw-bold mt-2 pt-1 mb-0" onclick="signupform()">Don't have an account? <a href="#!"
+                  class="link-danger" id="register" >Register</a></p>
+            </div>
+  <!--  -->
+          </form>
         </div>
-        <div class = "standard-body">
-            <section class="vh-100 gradient-custom">
-                <div class="container py-5 h-100">
-                  <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col-20 col-md-20 col-lg-25 col-xl-35">
-                      <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                        <div class="card-body p-5 text-center">
-              
-                          <div class="mb-md-5 mt-md-4 pb-5">
-              
-                            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                            <p class="text-white-50 mb-5">Please enter your login and password!</p>
-              
-                            <div data-mdb-input-init class="form-outline form-white mb-4">
-                              <input type="email" id="typeUsername" class="form-control form-control-lg" />
-                              <label class="form-label" for="typeUsername">Username</label>
-                            </div>
-              
-                            <div data-mdb-input-init class="form-outline form-white mb-4">
-                              <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-                              <label class="form-label" for="typePasswordX">Password</label>
-                            </div>
-                            <div id = "signup"></div>
-
-                            <!-- <div data-mdb-input-init class="form-outline form-white mb-4">
-                                <input type="password" id="typePasswordY" class="form-control form-control-lg" />
-                                <label class="form-label" for="typePasswordY">Confirm Password</label>
-                              </div> -->
-        
-                            <div id = "sign-up">
-                                <button data-mdb-button-init data-mdb-ripple-init id = "login" class="btn btn-outline-light btn-lg px-5" type="submit" onclick="loginSignup()">Login</button>
-                            </div>
-                            
-              
-                            
-                          </div>
-              
-                          <div id = "hideSignup">
-                            <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold" onclick="signupform()">Sign Up</a>
-                            </p>
-                          </div>
-              
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-        </div>
-
-
-        
-    </header>
-    
-
-    
+      </div>
+    </div>
+   
+  </section>
 </body>
-<footer>
-    
+<footer class="footer">
+  <div class="footer-content">
+      <div class="footer-section about">
+          <h2>About Us</h2>
+          <p>We are a company dedicated to providing the best services.</p>
+      </div>
+      <div class="footer-section links">
+          <h2>Quick Links</h2>
+          <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Contact</a></li>
+          </ul>
+      </div>
+      <div class="footer-section contact">
+          <h2>Contact Us</h2>
+          <p>Email: info@example.com</p>
+          <p>Phone: +123 456 7890</p>
+      </div>
+  </div>
+  <div class="footer-bottom">
+      &copy; 2023 Your Company. All rights reserved.
+  </div>
 </footer>
 <script src="js/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
