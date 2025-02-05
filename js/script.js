@@ -1,4 +1,5 @@
 const APIKEY = "6793b4d81128e05c4b6abe6c";
+let memberdataList = [];
 
 //userinfo for top of the page
 document.addEventListener('DOMContentLoaded', function() {
@@ -20,11 +21,99 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   userinfo[0].appendChild(logoutBtn);
   }
-  if (!localStorage.getItem('userid')) {
+  if (!localStorage.getItem('')) {
     logoutBtn.style.display = 'none';
   }
 });
 
+//listing page
+
+function limitText(text, limit) {
+  if (text.length > limit) {
+    return text.substring(0, limit) + '...';
+  }
+  return text;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const selectedCat = localStorage.getItem('userSelectedCat');
+  alert("hereinlisting")
+  fetch("https://mokesell1-2729.restdb.io/rest/listing", {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY,
+      "cache-control": "no-cache"
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    var productDiv = document.getElementById('card-container');
+    alert("hereinlisting2")
+    productDiv.innerHTML = ''; // Clear previous listings
+    alert(selectedCat);
+    alert(userSelectedCat);
+    let row;
+    data.forEach((product, index) => {
+      if (!selectedCat || product.catid === selectedCat) {
+        if (index % 4 === 0) {
+          row = document.createElement('div');
+          row.className = 'row';
+          productDiv.appendChild(row);
+        }
+        let col = document.createElement('div');
+        col.className = 'col-lg-3 col-md-6 mb-4 w-60';
+        col.innerHTML = `<div class="card h-100">
+            <img src="${product.photo}" class="card-img-top" alt="${product.name}" style="height: 150px; object-fit: cover;">
+            <div class="card-body">
+          <h5 class="card-title">${product.name}</h5>
+          <p class="card-text">${limitText(product.description, 100)}</p>
+          <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
+          <button id="like-${product._id}" class="btn btn-primary btn-sm">Like</button>
+            </div>
+          </div>`;
+        row.appendChild(col);
+
+        document.getElementById(`like-${product._id}`).addEventListener('click', function() {
+          // Add product to liked array of the user
+          this.innerHTML = 'Liked';
+        });
+      }
+    });
+  })
+  .catch(error => console.error('Error:', error));
+});
+//get member data function
+function getMemberData(userid) {
+  return fetch(`https://mokesell1-2729.restdb.io/rest/member/${userid}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY,
+      "cache-control": "no-cache"
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+
+    memberdataList = [data._id,data.username,liked,followed,rating,about]
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    throw error;
+  });
+}
+
+function chooseCat(catid){
+  userSelectedCat = "";
+  localStorage.removeItem('userSelectedCat');
+  localStorage.setItem('userSelectedCat', catid);
+  
+  userSelectedCat = catid;
+  window.location.href = 'listing.html';
+  alert(userSelectedCat);
+
+}
 
 
 
@@ -152,51 +241,7 @@ function loggedIn(userid,username) {
 // 4. add an event listener to each like button
 // 5. when the like button is clicked, add the product to the liked array of the user
 // 6. change the like button to 'liked'
-document.addEventListener('DOMContentLoaded', function() {
-  listing();
-});
-function listing() {
-  fetch("https://mokesell1-2729.restdb.io/rest/listing", {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      "x-apikey": APIKEY,
-      "cache-control": "no-cache"
-    }
-  })
-  .then(response => response.json())
-  .then(data => {
-    var productDiv = document.getElementById('card-container');
-    productDiv.innerHTML = ''; // Clear previous listings
-    let row;
-    data.forEach((product, index) => {
-      if (index % 4 === 0) {
-        row = document.createElement('div');
-        row.className = 'row';
-        productDiv.appendChild(row);
-      }
-      let col = document.createElement('div');
-      col.className = 'col-lg-3 col-md-6 mb-4 card';
-      col.innerHTML = `  
-          <img src="${product.image}" class="card-img-top" alt="${product.name}">
-          <div class="card-body">
-            <h5 class="card-title">${product.name}</h5>
-            <p class="card-text">${limitText(product.description, 10)}</p>
-            <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
-            <button id="like-${product._id}" class="btn btn-primary">Like</button>
-          
-        </div>
-      `;
-      row.appendChild(col);
 
-      document.getElementById(`like-${product._id}`).addEventListener('click', function() {
-        // Add product to liked array of the user
-        this.innerHTML = 'Liked';
-      });
-    });
-  })
-  .catch(error => console.error('Error:', error));
-};
 
 //bump page
 window.addEventListener('resize', function() {
@@ -219,6 +264,10 @@ function showBumpMenu() {
 if (window.innerWidth < 576) {
   document.getElementById('list').style.display = 'none';
 }
+
+
+
+
 
 
 
