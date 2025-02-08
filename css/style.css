@@ -1,10 +1,37 @@
 
+
+/*userinfobar*/
 .header-space{
     height: 50px;
     width: 100%;
-    background-color: #f5f5f5;
+    background-color: #D49E9D;
 
 }
+.header-space .logout{
+    float: left;
+    margin-left: 25px;
+    margin-top: 10px;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+.header-space .logout:hover{
+    color: #f1c40f;
+}
+
+.header-space .login{
+    float: right;
+    margin-right: 25px;
+    margin-top: 10px;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    /* display: none; */
+}
+.header-space .login:hover{
+    color: #f1c40f;
+}
+
 
 .standard-body{
   width: 90%;
@@ -13,7 +40,18 @@
   border-radius: 10%;
   
 }
+.custom-bg{
+  background-color: #DED1BD;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
+
+#ls-category{
+  margin: 1%;
+  height: 50px;
+  width: 100%;
+  background-color: lightblue;
+}
 
 
 .card-container{
@@ -67,6 +105,9 @@
   display : flex;
 }
 
+.nav-custom-bg{
+  background-color: #ded1bd;
+}
 
 /* nav{
   backdrop-filter: blur(30px);
@@ -200,6 +241,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #FAF6F2 !important;
 }
 
 
@@ -276,3 +318,8 @@ body {
 
   }
 }
+
+
+
+/*userinfo*/
+
