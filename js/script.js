@@ -286,7 +286,7 @@ function profile() {
       document.getElementById('username').textContent = user.username;
       document.getElementById('rating').textContent = user.rating;
       document.getElementById('about').textContent = user.about;
-      // document.getElementById('avatar').src = user.picture.medium;
+      //document.getElementById('avatar').src = user.avatar;
     } else {
       console.log('User not found.');
     }
