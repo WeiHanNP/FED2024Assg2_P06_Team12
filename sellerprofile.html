@@ -8,41 +8,11 @@
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-    <style>
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 20px;
-      }
-      
-      #myBtn {
-        display: none;
-        position: fixed;
-        bottom: 20px;
-        right: 30px;
-        z-index: 99;
-        font-size: 18px;
-        border: none;
-        outline: none;
-        background-color: rgb(0, 0, 0);
-        color: white;
-        cursor: pointer;
-        padding: 15px;
-        border-radius: 50%;
-      }
-      
-      #myBtn:hover {
-        background-color: #555;
-      }
-      </style>
-</html>
-<body class = "listing-page">
-  <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<body class = "home-page">
     <header>
-        <title><i>Listing</i></title>
-        <div class = "header-space userinfo">        
-            <a href = "#"><h5 class = "logout">Logout</h5></a>
-            <a href = "login.html"><h5 class = "login">Login</h5></a>
-
+        <title><i>MokeSell</i></title>
+        <div class = "header-space">
+            
         </div>
         <div style = "height: 2px;">
         </div>
@@ -54,13 +24,13 @@
           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="listing.html">Listing <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="favourite.html">My Favourite</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="userprofile.html">My Account</a>
                 </li>
               </ul>
@@ -76,70 +46,58 @@
             </div>
           </nav>
     </header>
-    <div class = "standard-body">
-      <div id = "ls-category">
-        
+
+
+    <div id="sellerprofile"class="container mt-5 ml-7 mr-7 p-0 w-75 d-flex justify-content-center">
+        <div class="profile p-2">
+            <div class="d-flex align-items-start">
+                <div class="image mt-2">
+                    <img id="avatar" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" class="rounded" width="100" >
+                </div>
+                <div class="ml-3 w-100">
+                  <div class="p-3 mt-2 d-flex justify-content-around stats">
+                    <div class="p-2 mt-2 d-flex flex-column">
+                        <h4 id="username">contact90236785</h4>
+                    </div>
+                    <div class="p-2 d-flex flex-column">
+                        <span class="rating">Rating</span>
+                        <span id="rating" class="number1">2.5</span>
+                    </div>
+                    <div class="p-2 d-flex flex-column justify-content-center">
+                        <button id="follow-button" class="follow w-100 ml-2 p-1">Follow</button>
+                    </div>
+                  </div>
+                    
+                    <div class="d-flex mt-2 mb-1 w-75">
+                        <div id="about">In need of money. Pls hire me</div>
+                    </div>
+                    <input type="hidden" id="sellerid" value="12301">
+                </div> 
+            </div>
         </div>
-    <div id = "card-container">
-      
-    </div> 
-    </div> 
     </div>
 
-    
+    <h4 class="ml-4 mt-3">Listings</h4>
+    <div id="product-list" class="container mt-2 d-flex justify-content-around flex-row">
+        <div class="card p-2" style="width: 15rem; height: 25rem">
+            <img id="listing-img" src="Images\foldable_bicycle.jpg" class="card-img-top" alt="" style="max-width: 15rem; max-height: 17rem;">
+            <div class="listing-details p-1">
+                <h5 id="listing-title" class="card-title mt-2">Foldable Bicycle</h5>
+                <div id="listing-price" class="card-text">$120</div>
+                <div id="listing-condition" class="card-text">Lightly used</div>
+            </div>
+        </div>
+    </div>
+
+ 
+
+
+
 </body>
-<footer class="footer">
-  <div class="footer-content">
-      <div class="footer-section about">
-          <h2>About Us</h2>
-          <p>Sell, swap, or share your preloved items with a community that values sustainability.</p>
-      </div>
-      <div class="footer-section links">
-          <h2>Quick Links</h2>
-          <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="#">Account</a></li>
-              <li><a href="#">Favourite</a></li>
-          </ul>
-      </div>
-      <div class="footer-section contact">
-          <h2>Contact Us</h2>
-          <p>Email: contact@mokesell.com</p>
-          <p>Phone: +65 8817 9829</p>
-      </div>
-  </div>
-  <div class="footer-bottom">
-      &copy; 2025 The MokeSell. All rights reserved.
-  </div>
-</footer>
-
-  <!-- <script>
-    const APIKEY = "6793b4d81128e05c4b6abe6c"
-
+<footer>
     
-  </script> -->
+</footer>
 <script src="js/script.js"></script>
-<script>
-  // Get the button
-  let mybutton = document.getElementById("myBtn");
-  
-  // When the user scrolls down 20px from the top of the document, show the button
-  window.onscroll = function() {scrollFunction()};
-  
-  function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      mybutton.style.display = "block";
-    } else {
-      mybutton.style.display = "none";
-    }
-  }
-  
-  // When the user clicks on the button, scroll to the top of the document
-  function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
-  </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
