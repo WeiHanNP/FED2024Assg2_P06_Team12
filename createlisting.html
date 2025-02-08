@@ -48,12 +48,12 @@
     </header>
 
     <div class="card p-4 d-flex justify-content-center flex-column">
+        <h2 class="mb-3">Create a new listing</h2>
         <form action="/upload" method="post" enctype="multipart/form-data">
-            <label for="photo">Choose a photo:</label>
+            <label for="photo">Choose a photo:</label><br>
             <input type="file" id="item-photo" name="item-photo" accept="image/*">
         </form>
-        <img id="preview" src="" alt="Image preview" style="display: none;">
-        <div class="mb-3">
+        <div class="mb-3 mt-3">
             <label for="item-name" class="form-label">Item name</label>
             <input  class="form-control" id="item-name">
         </div>
@@ -67,7 +67,25 @@
         </div>
         <div class="mb-3">
             <label for="item-cat" class="form-label">Item category</label>
-            <input class="form-control" id="item-cat">
+            <select class="form-control" id="item-cat">
+                <option>Fashion</option>
+                <option>Electronics</option>
+                <option>Home & Kitchen</option>
+                <option>Beauty & Personal care</option>
+                <option>Health & Wellness</option>
+                <option>Toys & Games</option>
+                <option>Sports & Outdoors</option>
+                <option>Automotive</option>
+                <option>Books & Stationery</option>
+                <option>Pet Supplies</option>
+                <option>Groceries</option>
+                <option>Baby Products</option>
+                <option>Arts & Crafts</option>
+                <option>Digital products</option>
+                <option>Specialty Stores</option>
+                <option>Others</option>
+            </select>
+
         </div>
         <div class="mb-3">
             <label for="item-desc" class="form-label">Item description</label>
@@ -80,21 +98,6 @@
 <footer>
     
 </footer>
-<!-- <script>
-    function previewImage(event) {
-        const reader = new FileReader();
-        const preview = document.getElementById('preview');
-
-        reader.onload = function() {
-            preview.src = reader.result;
-            preview.style.display = 'block';
-        };
-
-        if (event.target.files[0]) {
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    }
-</script> -->
 <script src="js/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
