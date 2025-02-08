@@ -770,3 +770,31 @@ document.getElementById('create-listing').addEventListener('click', function() {
   })
   .catch(error => console.error('Error:', error));
 });
+
+//Search function
+async function searchDatabase(query) {
+  try {
+      // Construct the query string (e.g., searching for "name" or "description")
+      const queryString = query ? `?q=${JSON.stringify({ $text: query })}` : '';
+
+      // Make the GET request to RESTDB with the query string
+      const response = await fetch(APIKEY + queryString, 
+      {
+        'Content-Type': 'application/json',
+        "x-apikey": APIKEY,
+        "cache-control": "no-cache"
+      });
+
+      if (!response.ok) {
+          throw new Error('Failed to fetch data');
+      }
+
+      // Parse the response JSON
+      const data = await response.json();
+
+      // Display or use the search results
+      console.log(data);
+  } catch (error) {
+      console.error('Error:', error);
+  }
+}
