@@ -1,4 +1,8 @@
-const APIKEY = "6793b4d81128e05c4b6abe6c";
+ const APIKEY = "6793b4d81128e05c4b6abe6c";
+const APIKEY2 = "67a70fe2ecf91b27b74d1173";//for member
+const APIKEY2URLMEMBER = "https://mokesell3-33ea.restdb.io/rest/member" //for member
+const APIKEY3 = "67a728794d87449d37828004"
+const APIKEY3URL = "https://mokesell-9086.restdb.io/rest/listing"
 let memberdataList = [];
 
 // userinfo for top of the page
@@ -45,7 +49,7 @@ function limitText(text, limit) {
   }
   return text;
 }
-// index DOMContentLoaded
+//  
 document.addEventListener('DOMContentLoaded', function() {
   if (window.location.pathname.includes('index.html')) {
     loadindexlistings();
@@ -58,6 +62,19 @@ document.addEventListener('DOMContentLoaded', function() {
     loadListings();
     load_category();
     //localStorage.removeItem('userSelectedCat');
+  }
+});
+//load userprofile
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.location.pathname.includes('userprofile.html')) {
+    alert("userprofile");
+    userProfile();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.location.pathname.includes('sellerprofile.html')) {
+    sellerProfiles();
   }
 });
 
@@ -160,12 +177,16 @@ function loadListings() {
         let col = document.createElement('div');
         col.className = 'col-lg-3 col-md-6 mb-4 w-60';
         col.innerHTML = `<div class="card h-100">
-            <img src="${product.photo}" class="card-img-top" alt="${product.name}" style="height: 150px; object-fit: cover;">
+            <img src="${product.photourl}" class="card-img-top" alt="${product.name}" style="height: 150px; object-fit: cover;">
             <div class="card-body">
               <h5 class="card-title">${product.name}</h5>
+              <p class="card-text">$${product.listprice}</p>
               <p class="card-text">${limitText(product.description, 100)}</p>
+              <p class="card-text">Condition: ${product.condition}</p>
               <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
               <button id="like-${product._id}" class="btn btn-primary btn-sm">Like</button>
+              <button id="view-${product._id}" class="btn btn-primary btn-sm">View</button>
+
             </div>
           </div>`;
         row.appendChild(col);
@@ -173,6 +194,10 @@ function loadListings() {
         // Add event listener to the "Like" button
         document.getElementById(`like-${product._id}`).addEventListener('click', function() {
           this.innerHTML = 'Liked';
+        });
+        document.getElementById(`view-${product._id}`).addEventListener('click', function() {
+          localStorage.setItem('sellerid', product.sellerid);
+          window.location.href = 'sellerprofile.html';
         });
 
         // Increment the displayed product count
@@ -197,11 +222,11 @@ function limitText(text, limit) {
 
 //get member data function
 function getMemberData(userid) {
-  return fetch(`https://mokesell1-2729.restdb.io/rest/member/${userid}`, {
+  return fetch(`${APIKEY2URLMEMBER}/${userid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      "x-apikey": APIKEY,
+      "x-apikey": APIKEY2,
       "cache-control": "no-cache"
     }
   })
@@ -262,7 +287,7 @@ document.getElementById('signup-btn').addEventListener('click', function() {
       alert('Please fill in all fields');
     }
     if (passwordY.value == ""){
-      alert("here");
+      //alert("here");
       login(username.value,passwordX.value);
     }
     else{
@@ -280,7 +305,7 @@ document.getElementById('signup-btn').addEventListener('click', function() {
 // 3. make a POST request to the database to add the new user
 // 4. log the user in
 function signup(username,password) {
-  alert(username+password);
+  //alert(username+password);
   let jsondata = {
     "username": username,
     "password": password,
@@ -292,7 +317,7 @@ function signup(username,password) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      "x-apikey": APIKEY,
+      "x-apikey": APIKEY2,
       "cache-control": "no-cache"
     },
     body: JSON.stringify(jsondata),
@@ -302,7 +327,7 @@ function signup(username,password) {
     }
   };
 
-  fetch("https://mokesell1-2729.restdb.io/rest/member", settings)
+  fetch(APIKEY2URLMEMBER, settings)
   .then(respond => respond.json())
   .then(data => {
     console.log(data);
@@ -318,11 +343,11 @@ function signup(username,password) {
 // 3. loop through the users and check if the username and password match
 // 4. if they do, alert the user that they are logged in
 function login(username, password) {
-  fetch("https://mokesell1-2729.restdb.io/rest/member", {
+  fetch(APIKEY2URLMEMBER, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      "x-apikey": APIKEY,
+      "x-apikey": APIKEY2,
       "cache-control": "no-cache"
     }
   })
@@ -350,8 +375,8 @@ function login(username, password) {
 function loggedIn(userid,username) {
   localStorage.setItem('userid', userid);
   localStorage.setItem('username', username);
-  alert(userid);
-  alert(username);
+  // alert(userid);
+  // alert(username);
   window.location.href = 'index.html';
 }
 // end of login and signup pages
@@ -437,16 +462,19 @@ function loadindexlistings() {
       
       const col = document.createElement('div');
       col.className = 'col-lg-3 col-md-6 mb-4';
-      col.innerHTML = `
-        <div class="card h-100">
-          <img src="${product.photo}" class="card-img-top" alt="${product.name}" style="height: 150px; object-fit: cover;">
-          <div class="card-body">
-            <h5 class="card-title">${product.name}</h5>
-            <p class="card-text">${limitText(product.description, 80)}</p>
-            <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
-            <button class="btn btn-primary btn-sm like-button" data-id="${product._id}">Like</button>
-          </div>
-        </div>`;
+      col.innerHTML = `<div class="card h-100">
+            <img src="${product.photourl}" class="card-img-top" alt="${product.name}" style="height: 150px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">${product.name}</h5>
+              <p class="card-text">$${product.listprice}</p>
+              <p class="card-text">${limitText(product.description, 100)}</p>
+              <p class="card-text">Condition: ${product.condition}</p>
+              <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
+              <button id="like-${product._id}" class="btn btn-primary btn-sm">Like</button>
+              <button id="view-${product._id}" class="btn btn-primary btn-sm">View</button>
+
+            </div>
+          </div>`;
 
       row.appendChild(col);
       displayedProductCount++;
@@ -481,20 +509,160 @@ function limitText(text, limit) {
 
 
 //sellerprofile page
-let followButton = document.getElementById('follow-button');
-followButton.addEventListener('click', function() {
-    if (followButton.textContent === 'Follow') {
-      followButton.textContent = 'Following';
-      followButton.style.backgroundColor = 'grey';
+// document.addEventListener('DOMContentLoaded', function() {
+//   if (window.location.pathname.includes('sellerprofile.html')) {
+//     loadSellerProfile();
+//   }
+// });
+
+
+// function loadSellerProfile() {
+//   let followButton = document.getElementById('follow-button');
+// followButton.addEventListener('click', function() {
+//     if (followButton.textContent === 'Follow') {
+//       followButton.textContent = 'Following';
+//       followButton.style.backgroundColor = 'grey';
+//     } else {
+//       followButton.textContent = 'Follow';
+//       followButton.style.backgroundColor = ''; // Reset to default
+//     }
+//   });
+// }
+
+
+//userprofile.html
+function userProfile() {
+  // Retrieve user ID from local storage
+  let userid = localStorage.getItem('userid')?.trim(); // Use optional chaining to avoid errors if userid is null
+
+  if (!userid) {
+    console.log('No user ID found in local storage.');
+    return; // Exit the function if no user ID is found
+  }
+
+  // Fetch user data from the API
+  fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY2,
+      "cache-control": "no-cache"
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data) {
+        // Update the DOM with user data
+        document.getElementById('username').textContent = data.username || 'N/A';
+        document.getElementById('rating').textContent = data.rating || 'N/A';
+        document.getElementById('about').textContent = data.about || 'N/A';
+        // Add more fields as needed
+      } else {
+        console.log('User not found.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Optionally, display an error message to the user
+      alert('Failed to load user profile. Please try again later.');
+    });
+    
+
+    loadListing(userid);
+}
+
+//sellerprofile.html
+function sellerProfiles() {
+  let sellerid = localStorage.getItem('sellerid').trim();
+  alert(sellerid+"hehe");
+  if (sellerid) {
+    fetch(`${APIKEY2URLMEMBER}/${sellerid}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        "x-apikey": APIKEY2,
+        "cache-control": "no-cache"
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        document.getElementById('username').textContent = data.username;
+        document.getElementById('rating').textContent = data.rating;
+        document.getElementById('about').textContent = data.about;
+        // Add more fields as needed
+      } else {
+        console.log('User not found.');
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  } else {
+    console.log('No user ID found in local storage.');
+  }
+  document.getElementById('follow-button').addEventListener('click', function() {
+    let followButton = this;
+    let userid = localStorage.getItem('userid').trim();
+    let sellerid = localStorage.getItem('sellerid').trim();
+
+    if (userid && sellerid) {
+      fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          "x-apikey": APIKEY2,
+          "cache-control": "no-cache"
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data) {
+          let followed = data.followed || [];
+          if (!followed.includes(sellerid)) {
+            followed.push(sellerid);
+
+            fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                "x-apikey": APIKEY2,
+                "cache-control": "no-cache"
+              },
+              body: JSON.stringify({ followed: followed })
+            })
+            .then(response => response.json())
+            .then(updatedData => {
+              followButton.textContent = 'Following';
+              followButton.style.backgroundColor = 'grey';
+            })
+            .catch(error => console.error('Error:', error));
+          }
+        } else {
+          console.log('User not found.');
+        }
+      })
+      .catch(error => console.error('Error:', error));
     } else {
-      followButton.textContent = 'Follow';
-      followButton.style.backgroundColor = ''; // Reset to default
+      console.log('No user ID or seller ID found in local storage.');
     }
   });
+}
 
-
-// userprofile and sellerprofile page
+// // userprofile and sellerprofile page (LISTINGS)
 function loadListing(sellerid) {
+  alert("Seller ID:"+ sellerid);
+
+  // Validate seller ID
+  if (!sellerid || typeof sellerid !== 'string' || sellerid.trim() === '') {
+    console.error('Invalid seller ID provided.');
+    return;
+  }
+
+  // Fetch listings from API
   fetch("https://mokesell1-2729.restdb.io/rest/listing", {
     method: 'GET',
     headers: {
@@ -503,62 +671,84 @@ function loadListing(sellerid) {
       "cache-control": "no-cache"
     }
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) throw new Error('Network response was not ok');
+    return response.json();
+  })
   .then(data => {
-    var listings = document.getElementById('product-list');
-    let listings = data.filter(listing => listing.sellerid === sellerid.value);
-//console.log(listings);
-    if (listings.length > 0) {
-      let listing = listings[0];
-      document.getElementById('listing-img').src = listing.photourl;    
-      document.getElementById('listing-title').textContent = listing.title;
-      document.getElementById('listing-price').textContent = listing.price;
-      document.getElementById('listing-condition').textContent = listing.condition;
-    } else {
-      console.log('No listings found for this seller.');
+    console.log("Fetched Data:", data); // Debugging log
+
+    if (!Array.isArray(data)) {
+      console.error("Invalid response format. Expected an array.");
+      return;
+    }
+
+    const productDiv = document.getElementById('card-container');
+    productDiv.innerHTML = ''; // Clear previous listings
+
+    let row;
+    let displayedProductCount = 0;
+
+    // Filter and display products
+    data.forEach(product => {
+      alert("Product Seller ID:"+ product.sellerid); // Debugging log
+
+      if (product.sellerid && String(sellerid).trim().toUpperCase() === String(product.sellerid).trim().toUpperCase()) {
+        if (displayedProductCount % 4 === 0) {
+          row = document.createElement('div');
+          row.className = 'row';
+          productDiv.appendChild(row);
+        }
+
+        const col = document.createElement('div');
+        col.className = 'col-lg-3 col-md-6 mb-4';
+        col.innerHTML = `<div class="card h-100">
+            <img src="${product.photourl}" class="card-img-top" alt="${product.name}" style="height: 250px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">${product.name}</h5>
+              <p class="card-text cardp">$${product.listprice}</p>
+              <p class="card-text">${limitText(product.description, 100)}</p>
+              <p class="card-text">Condition: ${product.condition}</p>
+              <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
+              <button id="like-${product._id}" class="btn btn-primary btn-sm">Like</button>
+              <button id="view-${product._id}" class="btn btn-primary btn-sm">View</button>
+
+            </div>
+          </div>`;
+
+        row.appendChild(col);
+
+        const likeButton = col.querySelector(`#like-${product._id}`);
+        likeButton.addEventListener('click', function () {
+          this.innerHTML = 'Liked';
+        });
+
+        displayedProductCount++;
+      }
+    });
+
+    if (displayedProductCount === 0) {
+      productDiv.innerHTML = '<p>No listings found for this seller.</p>';
     }
   })
-  .catch(error => console.error('Error:', error));
+  .catch(error => {
+    console.error('Error:', error);
+    document.getElementById('card-container').innerHTML = '<p>Failed to load listings. Please try again later.</p>';
+  });
 }
 
 
-// Call the function with the sellerid from localStorage
-document.addEventListener('DOMContentLoaded', () => {
-  profile();
-  let sellerid = localStorage.getItem('sellerid');
-  if (sellerid) {
-    loadListing(sellerid);
-  }
-});
 
-
-function profile() {
-  fetch("https://mokesell1-2729.restdb.io/rest/member", {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      "x-apikey": APIKEY,
-      "cache-control": "no-cache"
-    }
-  })
-  .then(response => response.json()) 
-  .then(data => {
-    let username = localStorage.getItem('username');
-    let user = data.find(member => member.username === username);
-
-    if (user) {
-      document.getElementById('username').textContent = user.username;
-      document.getElementById('rating').textContent = user.rating;
-      document.getElementById('about').textContent = user.about;
-      //document.getElementById('avatar').src = user.avatar;
-    } else {
-      console.log('User not found.');
-    }
-  })
-  .catch(error => console.error('Error:', error));
-}
-
-
+// // // Call the function with the sellerid from localStorage
+// function sellerProfilePage() {
+//   document.addEventListener('DOMContentLoaded', () => {
+//     profile();
+//     let sellerid = localStorage.getItem('sellerid');
+//     if (sellerid) {
+//       loadListing(sellerid);
+//     }
+//   });
+// }
 
 
 //Initial check

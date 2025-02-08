@@ -1,0 +1,186 @@
+[
+    {
+        "_id": "67960049390b9f390000f4af",
+        "name": "1000mah Powerbank",
+        "description": "Never used",
+        "listdatetime": "2025-01-26T09:22:00.000Z",
+        "sellerid": "12300",
+        "listprice": 12,
+        "photo": [
+          "67a01dff390b9f39000120b6"
+        ],
+        "photo2": [],
+        "photo3": [],
+        "liststatus": "A",
+        "_created": "2025-01-26T09:28:41.365Z",
+        "_changed": "2025-02-05T05:44:34.909Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 7,
+        "condition": "Brand new",
+        "catid": "ET",
+        "photourl": "Images\\1000mah_powerbank.jpg"
+      },
+
+      {
+        "_id": "6798a15f390b9f390000f984",
+        "name": "Thrifted satin blouse",
+        "description": "Size: S / EU 36 / UK 8 / US 4",
+        "listdatetime": "2025-01-28T09:20:00.000Z",
+        "sellerid": "12304",
+        "listprice": 15,
+        "photo": [
+          "67a0253f390b9f39000120cc"
+        ],
+        "photo2": [],
+        "photo3": [],
+        "liststatus": "A",
+        "_created": "2025-01-28T09:20:31.729Z",
+        "_changed": "2025-02-05T05:45:09.998Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 6,
+        "condition": "Lightly used",
+        "catid": "FA",
+        "photourl": "Images\\thrifted_satin_blouse.jpg"
+      },
+      {
+        "_id": "67a0281c390b9f39000120d1",
+        "name": "Chinese and English books bundle",
+        "listdatetime": "2025-02-03T02:30:00.000Z",
+        "description": "Total 100 pieces. \nSelf collect near Pioneer MRT",
+        "sellerid": "12305",
+        "listprice": 5,
+        "photo": [
+          "67a0280e390b9f39000120cf"
+        ],
+        "photo2": [],
+        "photo3": [],
+        "condition": "Well used",
+        "liststatus": "A",
+        "_created": "2025-02-03T02:21:16.211Z",
+        "_changed": "2025-02-05T05:45:26.170Z",
+        "_createdby": "s10268429@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 5,
+        "catid": "BS",
+        "photourl": "Images\\english_and_chinese_books.jpg"
+      },
+      {
+        "_id": "67989fd9390b9f390000f97c",
+        "name": "Fancy white circle plate",
+        "description": "Plate for sale",
+        "listdatetime": "2025-01-28T09:12:00.000Z",
+        "sellerid": "12302",
+        "listprice": 50,
+        "photo": [
+          "67989fcd390b9f390000f97a"
+        ],
+        "photo2": [],
+        "photo3": [],
+        "liststatus": "A",
+        "_created": "2025-01-28T09:14:01.140Z",
+        "_changed": "2025-02-06T13:00:54.829Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 5,
+        "condition": "Lightly used",
+        "catid": "HK",
+        "photourl": "/not/set/yet.jpg"
+      },
+      {
+        "_id": "6798a098390b9f390000f981",
+        "name": "Plate with decoration",
+        "description": "decoration",
+        "listdatetime": "2025-01-28T09:16:00.000Z",
+        "sellerid": "12302",
+        "listprice": 20,
+        "photo": [
+          "6798a08f390b9f390000f97f"
+        ],
+        "photo2": [],
+        "photo3": [],
+        "liststatus": "A",
+        "_created": "2025-01-28T09:17:12.260Z",
+        "_changed": "2025-02-06T13:00:36.566Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 5,
+        "condition": "Brand new",
+        "catid": "HK",
+        "photourl": "/not/set/yet.jpg"
+      },
+      {
+        "_id": "67962201390b9f390000f4bf",
+        "name": "Foldable Bicycle",
+        "description": "It was used 2-3 times and got kept in the store room for 1 year. I am clearing up space and no longer cycle so I hope someone else will take good care of it.",
+        "listdatetime": "2025-01-26T11:52:00.000Z",
+        "sellerid": "12301",
+        "listprice": 120,
+        "photo": [
+          "679621c9390b9f390000f4bd"
+        ],
+        "photo2": [
+          "67a23bbc390b9f39000130ee"
+        ],
+        "photo3": [
+          "67a23bd4390b9f39000130f0"
+        ],
+        "liststatus": "A",
+        "_created": "2025-01-26T11:52:33.169Z",
+        "_changed": "2025-02-05T05:47:30.326Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 6,
+        "condition": "Lightly used",
+        "catid": "SO",
+        "photourl": "Images\\full_bicycle.jpg"
+      },
+      {
+        "_id": "67a4af924ac1175d00000405",
+        "name": "Hard drive 500gb",
+        "listdatetime": "2025-02-06T12:47:31.883Z",
+        "sellerid": "23134",
+        "listprice": 20,
+        "photo": [
+          "67a01dff390b9f39000120b6"
+        ],
+        "photo2": [],
+        "photo3": [],
+        "condition": "new",
+        "liststatus": "A",
+        "description": "500gb hard drive 7200rpm",
+        "catid": "ET",
+        "photourl": "/not/set/yet.jpg",
+        "_created": "2025-02-06T12:48:18.938Z",
+        "_changed": "2025-02-06T12:48:18.938Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+      {
+        "_id": "67a22875390b9f39000130da",
+        "name": "Crochet Red & Pink Heart-Shaped Flowers Bouquet",
+        "listdatetime": "2025-02-04T06:14:00.000Z",
+        "sellerid": "12308",
+        "listprice": 25,
+        "photo": [
+          "67a22861390b9f39000130d8"
+        ],
+        "photo2": [],
+        "photo3": [],
+        "liststatus": "A",
+        "condition": "Brand new",
+        "catid": "AC",
+        "description": "Celebrate the romance of Valentine’s Day with this handcrafted Valentine’s Bouquet, featuring delicate Heart-Shaped Flowers. Each flower is meticulously crocheted with love and attention to detail, showcasing a charming heart design that beautifully symbolizes affection, devotion, and heartfelt emotions.",
+        "_created": "2025-02-04T14:47:17.788Z",
+        "_changed": "2025-02-05T05:47:53.822Z",
+        "_createdby": "s10268429@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 3,
+        "photourl": "Images\\crochet_red_pink_heart_shaped_bouquet.jpg"
+      }
+
+
+
+]
