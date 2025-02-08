@@ -48,48 +48,25 @@
     </header>
 
     <div class="card p-4 d-flex justify-content-center flex-column">
-        <h2 class="mb-3">Create a new listing</h2>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <label for="photo">Choose a photo:</label><br>
-            <input type="file" id="item-photo" name="item-photo" accept="image/*">
-        </form>
-        <div class="mb-3 mt-3">
-            <label for="item-name" class="form-label">Item name</label>
-            <input  class="form-control" id="item-name">
-        </div>
+        <h2 class="mb-3">Submit a Feedback</h2>
         <div class="mb-3">
-            <label for="item-price" class="form-label">Item price($)</label>
-            <input class="form-control" id="item-price">
-        </div>
-        <div class="mb-3">
-            <label for="item-condition" class="form-label">Item condition(New or Used)</label>
-            <input class="form-control" id="item-condition" placeholder="Brand new/Lightly used/Well used">
-        </div>
-        <div class="mb-3">
-            <label for="item-cat" class="form-label">Item category</label>
+            <label for="item-cat" class="form-label">Feedback category</label>
             <select class="form-control" id="item-cat">
-                <option>Fashion</option>
-                <option>Electronics</option>
-                <option>Home & Kitchen</option>
-                <option>Beauty & Personal care</option>
-                <option>Health & Wellness</option>
-                <option>Toys & Games</option>
-                <option>Sports & Outdoors</option>
-                <option>Automotive</option>
-                <option>Books & Stationery</option>
-                <option>Pet Supplies</option>
-                <option>Groceries</option>
-                <option>Baby Products</option>
-                <option>Arts & Crafts</option>
-                <option>Digital products</option>
-                <option>Specialty Stores</option>
-                <option>Others</option>
+                <option>Technical Problem</option>
+                <option>Complaint Against Seller</option>
+                <option>Feature Request</option>
+                <option>Payment Issue</option>
+                <option>Usability Issue</option>
+                <option>Email Notification Issue</option>
+                <option>Abusive Behavior Report</option>
+                <option>Account Registration Problem</option>
+                <option>Delay in Delivery</option>
+                <option>Fraudulent Listings</option>
             </select>
-
         </div>
         <div class="mb-3">
-            <label for="item-desc" class="form-label">Item description</label>
-            <textarea class="form-control" id="item-desc" rows="3" placeholder="Include other details that could be helpful to buyers or share the item's story"></textarea>
+            <label for="item-desc" class="form-label">Feedback description</label>
+            <textarea class="form-control" id="item-desc" rows="3" placeholder="Provide details that could be helpful for us to understand and deal with the issue"></textarea>
         </div>
         <button type="submit" id="submit-listing" class="bottom-right" onclick="window.location.href='userprofile.html'">Submit</button>
     </div>
