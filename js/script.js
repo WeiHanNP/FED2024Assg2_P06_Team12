@@ -434,7 +434,7 @@ function loadindexlistings() {
         row.className = 'row';
         productDiv.appendChild(row);
       }
-
+      
       const col = document.createElement('div');
       col.className = 'col-lg-3 col-md-6 mb-4';
       col.innerHTML = `
@@ -480,8 +480,89 @@ function limitText(text, limit) {
 
 
 
+//sellerprofile page
+let followButton = document.getElementById('follow-button');
+followButton.addEventListener('click', function() {
+    if (followButton.textContent === 'Follow') {
+      followButton.textContent = 'Following';
+      followButton.style.backgroundColor = 'grey';
+    } else {
+      followButton.textContent = 'Follow';
+      followButton.style.backgroundColor = ''; // Reset to default
+    }
+  });
+
+
+// userprofile and sellerprofile page
+function loadListing(sellerid) {
+  fetch("https://mokesell1-2729.restdb.io/rest/listing", {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY,
+      "cache-control": "no-cache"
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    var listings = document.getElementById('product-list');
+    let listings = data.filter(listing => listing.sellerid === sellerid.value);
+//console.log(listings);
+    if (listings.length > 0) {
+      let listing = listings[0];
+      document.getElementById('listing-img').src = listing.photourl;    
+      document.getElementById('listing-title').textContent = listing.title;
+      document.getElementById('listing-price').textContent = listing.price;
+      document.getElementById('listing-condition').textContent = listing.condition;
+    } else {
+      console.log('No listings found for this seller.');
+    }
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+
+// Call the function with the sellerid from localStorage
+document.addEventListener('DOMContentLoaded', () => {
+  profile();
+  let sellerid = localStorage.getItem('sellerid');
+  if (sellerid) {
+    loadListing(sellerid);
+  }
+});
+
+
+function profile() {
+  fetch("https://mokesell1-2729.restdb.io/rest/member", {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY,
+      "cache-control": "no-cache"
+    }
+  })
+  .then(response => response.json()) 
+  .then(data => {
+    let username = localStorage.getItem('username');
+    let user = data.find(member => member.username === username);
+
+    if (user) {
+      document.getElementById('username').textContent = user.username;
+      document.getElementById('rating').textContent = user.rating;
+      document.getElementById('about').textContent = user.about;
+      //document.getElementById('avatar').src = user.avatar;
+    } else {
+      console.log('User not found.');
+    }
+  })
+  .catch(error => console.error('Error:', error));
+}
 
 
 
 
+//Initial check
+if (window.innerWidth < 576) {
+  document.getElementById('list').style.display = 'none';
+}
 

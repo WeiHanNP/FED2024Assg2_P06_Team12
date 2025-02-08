@@ -45,7 +45,6 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-
 #ls-category{
   margin: 1%;
   height: 50px;
@@ -53,15 +52,11 @@
   background-color: lightblue;
 }
 
-
 .card-container{
     display: flex;
     justify-content:flex-start; /* Space between cards */
-    
     flex-direction: row;
-    flex-wrap: wrap;
-    
-      
+    flex-wrap: wrap;    
 }
 
 .card-container .card{
@@ -94,7 +89,6 @@
 
 
 
-
 /*login page*/
 .gradient-custom {
   background: #d49e8d;
@@ -121,6 +115,9 @@
     h1 {
       margin-left: 10px;
     }
+
+
+
 
 
 /* bump.html */
@@ -228,6 +225,92 @@
   }
   
 }
+
+
+
+
+/* userprofile.html & sellerprofile.html */
+body{
+  background-color:#B3E5FC;
+  border-radius: 10px;
+}
+
+.profile{
+  border-radius: 10px;
+  border: 2px solid #dfdfdf;
+  background-color: #fff;
+}
+
+.stats{
+    background: #ece3d4 !important;
+    color: #350909 !important;
+}
+
+.rating {
+  font-size: 18px;
+  color: #0e1e3a;
+}
+.following{
+  font-size: 18px;
+  color: #0e1e3a;
+}
+
+.number1 {
+  font-weight:500;
+}
+.number2{
+  font-weight:500;
+}
+
+#about{
+  font-size: 18px;
+  color: #0e1e3a;
+}
+
+.follow{
+  font-size: 22px;
+  background-color: #8b6655;
+  color: #f7e3c2;
+  border: none;
+}
+.update{
+  font-size: 20px;
+  background-color: #663d28;
+  color: #f0e7d8;
+  border: none;
+  border-radius: 10px;
+}
+.feedback{
+  font-size: 20px;
+  background-color: #663d28;
+  color: #f0e7d8;
+  border: none;
+  border-radius: 10px;
+}
+.settings{
+  font-size: 20px;
+  background-color: #663d28;
+  color: #f0e7d8;
+  border: none;
+  border-radius: 10px;
+}
+
+.add-listing{
+  font-size: 20px;
+  background-color: #884c2d;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  position: fixed;
+  bottom: 7%;
+  left: 25%;
+}
+
+#listing-price{
+  font-weight: 500;
+}
+
+
 
 
 /*Footer*/
