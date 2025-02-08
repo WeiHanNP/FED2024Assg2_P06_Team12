@@ -11,8 +11,9 @@
 <body class = "home-page">
     <header>
         <title><i>MokeSell</i></title>
-        <div class = "header-space">
-            
+        <div class = "header-space userinfo">
+          <a href = "#"><h5 class = "logout">Logout</h5></a>
+          <a href = "login.html"><h5 class = "login">Login</h5></a>
         </div>
         <div style = "height: 2px;">
         </div>
@@ -89,19 +90,14 @@
             </div>
         </div>
     </div>
+    <div class = "standard-body">
+    <h4 class="ml-4 mt-3 user-own-listing">Listings</h4>
+    <div id = "card-container">
+
 
     <h4 class="ml-4 mt-3">Listings</h4>
     <div id="product-list" class="container mt-2 mb-5 d-flex justify-content-around flex-row">
       <!-- width is 15rem so 4 listings can fit in a row -->
-        <div class="card p-2" style="width: 15rem; height: 25rem"> 
-            <img id="listing-img" src="Images\thrifted_satin_blouse.jpg" class="card-img-top" alt="" style="max-width: 15rem; max-height: 17rem;">
-            <div class="listing-details p-1">
-                <h5 id="listing-title" class="card-title mt-2">Thrifted satin blouse</h5>
-                <div id="listing-price" class="card-text">$15</div>
-                <div id="listing-condition" class="card-text">Lightly used</div>
-            </div>
-        </div>
-
         <!-- <div class="card p-2" style="width: 15rem; height: 25rem"> 
           <img id="listing-img" src="" class="card-img-top" alt="" style="max-width: 15rem; max-height: 17rem;">
           <div class="listing-details p-1">
@@ -109,13 +105,12 @@
               <div id="listing-price" class="card-text"></div>
               <div id="listing-condition" class="card-text"></div>
           </div>
-        </div> -->
-    </div>
+        </div>
+    </div> -->
 
     <button class="add-listing w-50 mb-2" onclick="window.location.href='createlisting.html'">+</button>
 
-
-
+</div>
 
 
 </body>
