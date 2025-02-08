@@ -1,4 +1,4 @@
- const APIKEY = "6793b4d81128e05c4b6abe6c";
+const APIKEY = "6793b4d81128e05c4b6abe6c";
 const APIKEY2 = "67a70fe2ecf91b27b74d1173";//for member
 const APIKEY2URLMEMBER = "https://mokesell3-33ea.restdb.io/rest/member" //for member
 const APIKEY3 = "67a728794d87449d37828004"
@@ -463,7 +463,7 @@ function loadindexlistings() {
       const col = document.createElement('div');
       col.className = 'col-lg-3 col-md-6 mb-4';
       col.innerHTML = `<div class="card h-100">
-            <img src="${product.photourl}" class="card-img-top" alt="${product.name}" style="height: 150px; object-fit: cover;">
+            <img src="${product.photourl}" class="card-img-top" alt="${product.name}" style="height: 40%; object-fit: cover;">
             <div class="card-body">
               <h5 class="card-title">${product.name}</h5>
               <p class="card-text">$${product.listprice}</p>
@@ -508,27 +508,6 @@ function limitText(text, limit) {
 
 
 
-//sellerprofile page
-// document.addEventListener('DOMContentLoaded', function() {
-//   if (window.location.pathname.includes('sellerprofile.html')) {
-//     loadSellerProfile();
-//   }
-// });
-
-
-// function loadSellerProfile() {
-//   let followButton = document.getElementById('follow-button');
-// followButton.addEventListener('click', function() {
-//     if (followButton.textContent === 'Follow') {
-//       followButton.textContent = 'Following';
-//       followButton.style.backgroundColor = 'grey';
-//     } else {
-//       followButton.textContent = 'Follow';
-//       followButton.style.backgroundColor = ''; // Reset to default
-//     }
-//   });
-// }
-
 
 //userprofile.html
 function userProfile() {
@@ -571,7 +550,6 @@ function userProfile() {
       // Optionally, display an error message to the user
       alert('Failed to load user profile. Please try again later.');
     });
-    
 
     loadListing(userid);
 }
@@ -739,20 +717,56 @@ function loadListing(sellerid) {
 
 
 
-// // // Call the function with the sellerid from localStorage
-// function sellerProfilePage() {
-//   document.addEventListener('DOMContentLoaded', () => {
-//     profile();
-//     let sellerid = localStorage.getItem('sellerid');
-//     if (sellerid) {
-//       loadListing(sellerid);
-//     }
-//   });
-// }
+//createlisting.html
+// add photo URl to images folder
+let photoURL = document.getElementById('item-photo').value;
+let itemName = document.getElementById('item-name').value;
+let itemPrice = document.getElementById('item-price').value;
+let itemCondition = document.getElementById('item-condition').value;
+let itemCategory = document.getElementById('item-cat').value;
+let itemDescription = document.getElementById('item-description').value;
+
+let listingImg = document.getElementById('listing-img').value;
+let listingTitle = document.getElementById('listing-title').value;
+let listingPrice = document.getElementById('listing-price').value;
+let listingCondition = document.getElementById('listing-condition').value;
+let listingCategory = document.getElementById('listing-category').value;
+let listingDescription = document.getElementById('listing-description').value;
 
 
-//Initial check
-if (window.innerWidth < 576) {
-  document.getElementById('list').style.display = 'none';
-}
+document.getElementById('create-listing').addEventListener('click', function() {
+  listingImg = photoURL;
+  listingTitle = itemName;
+  listingPrice = itemPrice;
+  listingCondition = itemCondition;
+  listingCategory = itemCategory;
+  listingDescription = itemDescription;
 
+  let jsondata = {
+    "photo": listingImg,
+    "name": listingTitle,
+    "price": listingPrice,
+    "condition": listingCondition,
+    "category": listingCategory,    
+    "description": listingDescription,
+  };
+
+  let settings = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY,
+      "cache-control": "no-cache"
+    },
+    body: JSON.stringify(jsondata)
+  };
+
+  fetch("https://mokesell1-2729.restdb.io/rest/listing", settings)
+  .then(response => response.json())
+  .then(data => {
+    
+    console.log(data);
+    alert('Listing created successfully');
+  })
+  .catch(error => console.error('Error:', error));
+});
