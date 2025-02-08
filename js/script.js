@@ -507,7 +507,7 @@ function loadListing(sellerid) {
   .then(data => {
     var listings = document.getElementById('product-list');
     let listings = data.filter(listing => listing.sellerid === sellerid.value);
-//console.log(listings);
+
     if (listings.length > 0) {
       let listing = listings[0];
       document.getElementById('listing-img').src = listing.photourl;    
@@ -560,9 +560,56 @@ function profile() {
 
 
 
+//createlisting.html
+// add photo URl to images folder
+let photoURL = document.getElementById('item-photo').value;
+let itemName = document.getElementById('item-name').value;
+let itemPrice = document.getElementById('item-price').value;
+let itemCondition = document.getElementById('item-condition').value;
+let itemCategory = document.getElementById('item-cat').value;
+let itemDescription = document.getElementById('item-description').value;
 
-//Initial check
-if (window.innerWidth < 576) {
-  document.getElementById('list').style.display = 'none';
-}
+let listingImg = document.getElementById('listing-img').value;
+let listingTitle = document.getElementById('listing-title').value;
+let listingPrice = document.getElementById('listing-price').value;
+let listingCondition = document.getElementById('listing-condition').value;
+let listingCategory = document.getElementById('listing-category').value;
+let listingDescription = document.getElementById('listing-description').value;
 
+
+document.getElementById('create-listing').addEventListener('click', function() {
+  listingImg = photoURL;
+  listingTitle = itemName;
+  listingPrice = itemPrice;
+  listingCondition = itemCondition;
+  listingCategory = itemCategory;
+  listingDescription = itemDescription;
+
+  let jsondata = {
+    "photo": listingImg,
+    "name": listingTitle,
+    "price": listingPrice,
+    "condition": listingCondition,
+    "category": listingCategory,    
+    "description": listingDescription,
+  };
+
+  let settings = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY,
+      "cache-control": "no-cache"
+    },
+    body: JSON.stringify(jsondata)
+  };
+
+  fetch("https://mokesell1-2729.restdb.io/rest/listing", settings)
+  .then(response => response.json())
+  .then(data => {
+    
+    console.log(data);
+    alert('Listing created successfully');
+  })
+  .catch(error => console.error('Error:', error));
+});
