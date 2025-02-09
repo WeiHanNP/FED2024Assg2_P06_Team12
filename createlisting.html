@@ -11,8 +11,9 @@
 <body class = "home-page">
     <header>
         <title><i>MokeSell</i></title>
-        <div class = "header-space">
-            
+        <div class = "header-space userinfo">
+          <a href = "#"><h5 class = "logout">Logout</h5></a>
+          <a href = "login.html"><h5 class = "login">Login</h5></a>
         </div>
         <div style = "height: 2px;">
         </div>
@@ -49,9 +50,8 @@
 
     <div class="card p-4 d-flex justify-content-center flex-column">
         <h2 class="mb-3">Create a new listing</h2>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <label for="photo">Choose a photo:</label><br>
-            <input type="file" id="item-photo" name="item-photo" accept="image/*">
+        <label for="item-image">Upload Image</label> 
+        <input type="file" id="item-image" accept="image/*" required> 
         </form>
         <div class="mb-3 mt-3">
             <label for="item-name" class="form-label">Item name</label>
@@ -91,7 +91,7 @@
             <label for="item-desc" class="form-label">Item description</label>
             <textarea class="form-control" id="item-desc" rows="3" placeholder="Include other details that could be helpful to buyers or share the item's story"></textarea>
         </div>
-        <button type="submit" id="submit-listing" class="bottom-right" onclick="window.location.href='userprofile.html'">Submit</button>
+        <button type="submit" id="submit-listing" class="bottom-right" >Submit</button>
     </div>
 
 </body>
