@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+        }
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            width: 100%;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div header-space userinfo>
+    <a><h5 class = "back" onclick="history.back()">Back</h5></a>
+</div>
+
+<div class="container login-container">
+    <div class="login-card">
+        <div class="text-center mb-4">
+            <h3>Admin Login</h3>
+        </div>
+        <form>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="Enter username">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Enter password">
+            </div>
+            <button type="submit" class="btn btn-custom">Login</button>
+        </form>
+        
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Fetch admin data from the database
+    fetch('https://mokesell-9086.restdb.io/rest/admin', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-apikey': '67a728794d87449d37828004'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Check if the entered credentials match any admin in the database
+        const admin = data.find(admin => admin.username === username && admin.password === password);
+
+        if (admin) {
+            // Redirect to admin page if credentials are valid
+            window.location.href = 'adminpage.html';
+        } else {
+            // Show error message if credentials are invalid
+            alert('Invalid username or password');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to validate credentials. Please try again later.');
+    });
+});
+</script>
+</body>
+</html>
