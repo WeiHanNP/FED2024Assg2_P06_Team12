@@ -1005,11 +1005,11 @@ document.getElementById('create-listing').addEventListener('click', function() {
   listingDescription = itemDescription;
 
   let jsondata = {
-    "photo": listingImg,
+    "photourl": listingImg,
     "name": listingTitle,
-    "price": listingPrice,
+    "listprice": listingPrice,
     "condition": listingCondition,
-    "category": listingCategory,    
+    "catid": listingCategory,    
     "description": listingDescription,
   };
 
@@ -1033,6 +1033,66 @@ document.getElementById('create-listing').addEventListener('click', function() {
   .catch(error => console.error('Error:', error));
 });
 
+
+
+// feedback.html
+document.getElementById('submit-feedback').addEventListener('click', function () {
+  var fbkCat = document.getElementById('fbk-cat').value.trim(); // Trim whitespace
+  var fbkDesc = document.getElementById('fbk-desc').value.trim(); // Trim whitespace
+
+  // Validate inputs
+  if (!fbkCat || !fbkDesc) {
+    alert('Please fill in all fields');
+    return; // Stop execution if validation fails
+  }
+
+  // Call the feedback function
+  feedback(fbkCat, fbkDesc);
+});
+
+function feedback(fbkCat, fbkDesc) {
+  // Prepare the data to be sent
+  let jsondata = {
+    userid: localStorage.getItem('userid'),
+    feedbackcat: fbkCat,
+    detail: fbkDesc,
+    status: 'Pending',
+  };
+
+  // Define fetch settings
+  let settings = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-apikey': APIKEY2,
+      'cache-control': 'no-cache',
+    },
+    body: JSON.stringify(jsondata),
+  };
+
+  // Log the request payload
+  console.log('Sending request with payload:', jsondata);
+
+  // Send the feedback data to the server
+  fetch('https://mokesell3-33ea.restdb.io/rest/feedback', settings)
+    .then((response) => {
+      console.log('Response status:', response.status); // Log the response status
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log('Feedback submitted successfully:', data);
+      // Redirect to userprofile.html after successful submission
+      window.location.href = 'userprofile.html';
+    })
+    .catch((error) => {
+      console.error('There was a problem with the fetch operation:', error);
+      alert('Failed to submit feedback. Please try again.'); // Notify the user
+    });
+
+  
 //Search function
 async function searchDatabase(query) {
   try {
@@ -1059,4 +1119,5 @@ async function searchDatabase(query) {
   } catch (error) {
       console.error('Error:', error);
   }
+
 }
