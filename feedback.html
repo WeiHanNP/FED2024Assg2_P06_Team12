@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@
         </div>
         <div style = "height: 2px;">
         </div>
-        <nav class="navbar navbar-expand-lg navbar-light nav-custom-bg">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="index.html">MokeSell</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -47,69 +47,34 @@
           </nav>
     </header>
 
-
-    <div id="sellerprofile"class="container mt-5 ml-7 mr-7 p-0 w-75 d-flex justify-content-center">
-        <div class="profile p-2">
-            <div class="d-flex align-items-start">
-                <div class="image mt-2">
-                    <img id="avatar" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" class="rounded" width="100" >
-                </div>
-                <div class="ml-3 w-100">
-                  <div class="p-3 mt-2 d-flex justify-content-around stats">
-                    <div class="p-2 mt-2 d-flex flex-column">
-                        <h4 id="username">contact90236785</h4>
-                    </div>
-                    <div class="p-2 d-flex flex-column">
-                        <span class="rating">Rating</span>
-                        <span id="rating" class="number1">2.5</span>
-                    </div>
-                    <div class="p-2 d-flex flex-column justify-content-center">
-                        <button id="follow-button" class="follow w-100 ml-2 p-1">Follow</button>
-                    </div>
-                  </div>
-                    
-                    <div class="d-flex mt-2 mb-1 w-75">
-                        <div id="about">In need of money. Pls hire me</div>
-                    </div>
-                    <input type="hidden" id="sellerid" value="12301">
-                </div> 
-            </div>
+    <div class="card p-4 d-flex justify-content-center flex-column">
+        <h2 class="mb-3">Submit a Feedback</h2>
+        <div class="mb-3">
+            <label for="fbk-cat" class="form-label">Feedback category</label>
+            <select class="form-control" id="fbk-cat">
+                <option>Technical Problem</option>
+                <option>Complaint Against Seller</option>
+                <option>Feature Request</option>
+                <option>Payment Issue</option>
+                <option>Usability Issue</option>
+                <option>Email Notification Issue</option>
+                <option>Abusive Behavior Report</option>
+                <option>Account Registration Problem</option>
+                <option>Delay in Delivery</option>
+                <option>Fraudulent Listings</option>
+            </select>
         </div>
-    </div>
-
-    <h4 class="ml-4 mt-3">Listings</h4>
-    <div id="product-list" class="container mt-2 d-flex justify-content-around flex-row">
-        <div class="card p-2" style="width: 15rem; height: 25rem">
-            <img id="listing-img" src="Images\foldable_bicycle.jpg" class="card-img-top" alt="" style="max-width: 15rem; max-height: 17rem;">
-            <div class="listing-details p-1">
-                <h5 id="listing-title" class="card-title mt-2">Foldable Bicycle</h5>
-                <div id="listing-price" class="card-text">$120</div>
-                <div id="listing-condition" class="card-text">Lightly used</div>
-            </div>
+        <div class="mb-3">
+            <label for="fbk-desc" class="form-label">Feedback description</label>
+            <textarea class="form-control" id="fbk-desc" rows="3" placeholder="Provide details that could be helpful for us to understand and deal with the issue"></textarea>
         </div>
+        <button type="submit" id="submit-feedback" class="bottom-right" onclick="window.location.href='userprofile.html'">Submit</button>
     </div>
-
- 
-
-
 
 </body>
 <footer>
     
 </footer>
-<script>
-    let followButton = document.getElementById('follow-button');
-    followButton.addEventListener('click', function() {
-    if (followButton.textContent === 'Follow') {
-        followButton.textContent = 'Following';
-        followButton.style.color = '#f4e9de';        
-        followButton.style.backgroundColor = 'grey';
-    } else {
-        followButton.textContent = 'Follow';
-        followButton.style.backgroundColor = ''; // Reset to default
-    }
-    });
-</script>
 <script src="js/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
