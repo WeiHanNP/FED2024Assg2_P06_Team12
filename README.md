@@ -63,9 +63,23 @@ Overall, these colors create a natural and stylish look, ideal for a lifestyle-f
 - **[restdb.io](https://restdb.io/)** - Holds our data in a NoSQL database.
 - **[Postman](https://www.postman.com/)** - Used for testing and reading our restdb.io data.
 - **[Bootstrap](https://getbootstrap.com/)** - Provides a responsive design template for better UI/UX.
-![WhatsApp Image 2025-02-10 at 00 20 55_a8dfd1ac](https://github.com/user-attachments/assets/3e895204-7789-4b1e-86a6-b02e91cc7096)
 
 ---
+
+# Assistive AI Documentation
+
+In this section, we document the process of using AI tools (e.g., ChatGPT, Gemini, etc.) to assist in the development of various features and functionalities of our web application. Proper documentation of AI-assisted development ensures transparency and contributes to best practices.
+
+---
+
+## Feature: upload image in html
+
+### AI Tool Used: **CoPilot**  
+#### Purpose:  
+We used CoPilot to assist with the implementation to accept photos input in html
+![WhatsApp Image 2025-02-10 at 00 26 56_e0b6f634](https://github.com/user-attachments/assets/ad8f818e-bdc1-4f18-a751-6747a9b50c5a)
+
+
 
 ## Content
 - The name, condition and description of the crochet bouquet listing are copied from **[Crochet Red & Pink Heart-Shaped Bouquet listing](https://www.carousell.sg/p/%E3%80%90valentine%E2%80%99s-day%E3%80%91crochet-red-pink-heart-shaped-flowers-bouquet-1344828258/?t-id=v_BfQA2Oa9_1736929626038&t-referrer_browse_type=seller&t-referrer_page_type=profile&t-referrer_request_id=rFwrCfyZ1H1eruQo&t-tap_index=1)**
