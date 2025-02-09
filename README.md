@@ -93,10 +93,10 @@ The photos used in this site were obtained from:
 - **[Seagate 500Gb Hard drive listing](https://www.carousell.sg/p/seagate-500gb-2-5-inch-hard-drive-1325720682/?t-id=v_BfQA2Oa9_1736929626038&t-referrer_browse_type=search_results&t-referrer_page_type=search&t-referrer_request_id=wt_0HUidI8tPYJDQ&t-referrer_search_query=Hard%20drive%20500gb&t-referrer_search_query_source=direct_search&t-referrer_sort_by=popular&t-tap_index=11)**
 
 **Canva AI**
--Prompt: automotive tool parts advertisement without people
--Prompt: Beauty & Personal Care advertisement without people
--Prompt: Bicycle advertisement
--Prompt: house appliance advertisement
+- Prompt: automotive tool parts advertisement without people
+- Prompt: Beauty & Personal Care advertisement without people
+- Prompt: Bicycle advertisement
+- Prompt: house appliance advertisement
 
 ---
 
