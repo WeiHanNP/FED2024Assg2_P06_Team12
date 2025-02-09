@@ -42,15 +42,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 });
-//listing page
 
+//listing page
 function limitText(text, limit) {
   if (text.length > limit) {
     return text.substring(0, limit) + '...';
   }
   return text;
 }
-//  
+
 document.addEventListener('DOMContentLoaded', function() {
   if (window.location.pathname.includes('index.html')) {
     loadindexlistings();
@@ -173,7 +173,7 @@ function loadListings() {
         // Create the column for the product
         let col = document.createElement('div');
         col.className = 'col-lg-3 col-md-6 mb-4 w-60';
-        col.innerHTML = `<div class="card h-100">
+        col.innerHTML = `<div class="card h-100 p-2">
             <img src="${product.photourl}" class="card-img-top" alt="${product.name}" style="height: 150px; object-fit: cover;">
             <div class="card-body">
               <h5 class="card-title">${product.name}</h5>
@@ -189,8 +189,10 @@ function loadListings() {
         row.appendChild(col);
 
         // Add event listener to the "Like" button
+        //change text to liked and change color to red
         document.getElementById(`like-${product._id}`).addEventListener('click', function() {
           this.innerHTML = 'Liked';
+          this.style.backgroundColor = 'red';
         });
         document.getElementById(`view-${product._id}`).addEventListener('click', function() {
           localStorage.setItem('sellerid', product.sellerid);
@@ -600,7 +602,7 @@ function userProfile() {
 //sellerprofile.html
 function sellerProfiles() {
   let sellerid = localStorage.getItem('sellerid').trim();
-  alert(sellerid+"hehe");
+  // alert(sellerid+"hehe");
   if (sellerid) {
     fetch(`${APIKEY2URLMEMBER}/${sellerid}`, {
       method: 'GET',
@@ -675,7 +677,7 @@ function sellerProfiles() {
 
 // // userprofile and sellerprofile page (LISTINGS)
 function loadListing(sellerid) {
-  alert("Seller ID:"+ sellerid);
+  // alert("Seller ID:"+ sellerid);
 
   // Validate seller ID
   if (!sellerid || typeof sellerid !== 'string' || sellerid.trim() === '') {
@@ -712,7 +714,7 @@ function loadListing(sellerid) {
 
     // Filter and display products
     data.forEach(product => {
-      alert("Product Seller ID:"+ product.sellerid); // Debugging log
+      // alert("Product Seller ID:"+ product.sellerid); // Debugging log
 
       if (product.sellerid && String(sellerid).trim().toUpperCase() === String(product.sellerid).trim().toUpperCase()) {
         if (displayedProductCount % 4 === 0) {
@@ -1120,4 +1122,4 @@ async function searchDatabase(query) {
       console.error('Error:', error);
   }
 
-}
+}}
