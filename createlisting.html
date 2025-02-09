@@ -11,8 +11,9 @@
 <body class = "home-page">
     <header>
         <title><i>MokeSell</i></title>
-        <div class = "header-space">
-            
+        <div class = "header-space userinfo">
+          <a href = "#"><h5 class = "logout">Logout</h5></a>
+          <a href = "login.html"><h5 class = "login">Login</h5></a>
         </div>
         <div style = "height: 2px;">
         </div>
@@ -48,11 +49,9 @@
     </header>
     <div class="card p-4 d-flex justify-content-center flex-column">
         <dotlottie-player class="center" src="https://lottie.host/7d960104-a569-4c0b-a2d8-fe729f5fc16c/F3IiRz7DeQ.lottie" background="transparent" speed="1" style="width: 170px; height: 170px" loop autoplay></dotlottie-player>
-        <h2 class="mb-3 center">Create a new listing</h2>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <label for="photo">Choose a photo:</label>
-            <input type="file" id="item-photo" name="item-photo" accept="image/*">
-        </form>
+        <h2 class="mb-3">Create a new listing</h2>
+        <label for="item-image">Upload Image</label> 
+        <input type="file" id="item-image" accept="image/*" required> 
         <div class="mb-3 mt-3">
             <label for="item-name" class="form-label">Item name</label>
             <input  class="form-control" id="item-name">
@@ -91,12 +90,33 @@
             <label for="item-desc" class="form-label">Item description</label>
             <textarea class="form-control" id="item-desc" rows="3" placeholder="Include other details that could be helpful to buyers or share the item's story"></textarea>
         </div>
-        <button type="submit" id="submit-listing" class="bottom-right" onclick="window.location.href='userprofile.html'">Submit</button>
+        <button type="submit" id="submit-listing" class="bottom-right" >Submit</button>
     </div>
 
 </body>
-<footer>
-    
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h2>About Us</h2>
+            <p>Sell, swap, or share your preloved items with a community that values sustainability.</p>
+        </div>
+        <div class="footer-section links">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="userprofile.html">Account</a></li>
+                <li><a href="favourite.html">Favourite</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h2>Contact Us</h2>
+            <p>Email: contact@mokesell.com</p>
+            <p>Phone: +65 8817 9829</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2025 The MokeSell. All rights reserved.
+    </div>
 </footer>
 <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 <script src="js/script.js"></script>

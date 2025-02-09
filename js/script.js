@@ -42,15 +42,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 });
-//listing page
 
+//listing page
 function limitText(text, limit) {
   if (text.length > limit) {
     return text.substring(0, limit) + '...';
   }
   return text;
 }
-//  
+
 document.addEventListener('DOMContentLoaded', function() {
   if (window.location.pathname.includes('index.html')) {
     loadindexlistings();
@@ -73,6 +73,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   if (window.location.pathname.includes('favorite.html')) {
     loadFavoriteListings();
+  }
+  if (window.location.pathname.includes('feedback.html')) {
+    feedback();
+  }
+  if (window.location.pathname.includes('createlisting.html')) {
+    createListing();
+  }
+  if (window.location.pathname.includes('editprofile.html')) {
+    editProfile();
   }
 });
 
@@ -173,7 +182,7 @@ function loadListings() {
         // Create the column for the product
         let col = document.createElement('div');
         col.className = 'col-lg-3 col-md-6 mb-4 w-60';
-        col.innerHTML = `<div class="card h-100">
+        col.innerHTML = `<div class="card h-100 p-2">
             <img src="${product.photourl}" class="card-img-top" alt="${product.name}" style="height: 150px; object-fit: cover;">
             <div class="card-body">
               <h5 class="card-title">${product.name}</h5>
@@ -189,8 +198,10 @@ function loadListings() {
         row.appendChild(col);
 
         // Add event listener to the "Like" button
+        //change text to liked and change color to red
         document.getElementById(`like-${product._id}`).addEventListener('click', function() {
           this.innerHTML = 'Liked';
+          this.style.backgroundColor = 'red';
         });
         document.getElementById(`view-${product._id}`).addEventListener('click', function() {
           localStorage.setItem('sellerid', product.sellerid);
@@ -600,7 +611,7 @@ function userProfile() {
 //sellerprofile.html
 function sellerProfiles() {
   let sellerid = localStorage.getItem('sellerid').trim();
-  alert(sellerid+"hehe");
+  // alert(sellerid+"hehe");
   if (sellerid) {
     fetch(`${APIKEY2URLMEMBER}/${sellerid}`, {
       method: 'GET',
@@ -675,7 +686,7 @@ function sellerProfiles() {
 
 // // userprofile and sellerprofile page (LISTINGS)
 function loadListing(sellerid) {
-  alert("Seller ID:"+ sellerid);
+  // alert("Seller ID:"+ sellerid);
 
   // Validate seller ID
   if (!sellerid || typeof sellerid !== 'string' || sellerid.trim() === '') {
@@ -712,7 +723,7 @@ function loadListing(sellerid) {
 
     // Filter and display products
     data.forEach(product => {
-      alert("Product Seller ID:"+ product.sellerid); // Debugging log
+      // alert("Product Seller ID:"+ product.sellerid); // Debugging log
 
       if (product.sellerid && String(sellerid).trim().toUpperCase() === String(product.sellerid).trim().toUpperCase()) {
         if (displayedProductCount % 4 === 0) {
@@ -979,118 +990,200 @@ function sellerProfilePage() {
 
 
 //createlisting.html
-// add photo URl to images folder
-let photoURL = document.getElementById('item-photo').value;
-let itemName = document.getElementById('item-name').value;
-let itemPrice = document.getElementById('item-price').value;
-let itemCondition = document.getElementById('item-condition').value;
-let itemCategory = document.getElementById('item-cat').value;
-let itemDescription = document.getElementById('item-description').value;
+function createListing() {
+  document.getElementById('submit-listing').addEventListener('click', function() {
+    const image = document.getElementById('item-image').files[0];
+    const name = document.getElementById('item-name').value;
+    const listprice = document.getElementById('item-price').value;
+    const condition = document.getElementById('item-condition').value;
+    const category = document.getElementById('item-cat').value;
+    const description = document.getElementById('description').value;
+    const sellerid = localStorage.getItem('userid');
+    alert('Listing created successfully');
+    // Validation
+    if (!name || !listprice || !condition || !category || !description || !image || !sellerid) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = function() {
+      const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+
+      const jsondata = {
+        name,
+        listprice,
+        condition,
+        category,
+        description,
+        photourl: base64String,
+        sellerid
+      };
+
+      const settings = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "x-apikey": APIKEY,
+          "cache-control": "no-cache"
+        },
+        body: JSON.stringify(jsondata)
+      };
+
+      fetch(APIKEY4URL, settings)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Created listing:', data);
+          alert('Listing created successfully');
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Failed to create listing. Please try again later.');
+        });
+    };
+
+    reader.readAsDataURL(image);
+  });
+}
 
 
-let listingImg = document.getElementById('listing-img').value;
-let listingTitle = document.getElementById('listing-title').value;
-let listingPrice = document.getElementById('listing-price').value;
-let listingCondition = document.getElementById('listing-condition').value;
-let listingCategory = document.getElementById('listing-category').value;
-let listingDescription = document.getElementById('listing-description').value;
+//edit profile page
+function editProfile() {
+  const userid = localStorage.getItem('userid');
+  if (!userid) {
+    console.error('Error: User ID not found in localStorage');
+    return;
+  }
 
-
-document.getElementById('create-listing').addEventListener('click', function() {
-  listingImg = photoURL;
-  listingTitle = itemName;
-  listingPrice = itemPrice;
-  listingCondition = itemCondition;
-  listingCategory = itemCategory;
-  listingDescription = itemDescription;
-
-  let jsondata = {
-    "photourl": listingImg,
-    "name": listingTitle,
-    "listprice": listingPrice,
-    "condition": listingCondition,
-    "catid": listingCategory,    
-    "description": listingDescription,
-  };
-
-  let settings = {
-    method: 'POST',
+  fetch(`https://mokesell1-2729.restdb.io/rest/member/${userid}`, {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       "x-apikey": APIKEY,
       "cache-control": "no-cache"
-    },
-    body: JSON.stringify(jsondata)
-  };
-
-  fetch("https://mokesell1-2729.restdb.io/rest/listing", settings)
-  .then(response => response.json())
-  .then(data => {
-    
-    console.log(data);
-    alert('Listing created successfully');
+    }
   })
-  .catch(error => console.error('Error:', error));
-});
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    if (data) {
+      document.getElementById('username').value = data.username || '';
+      document.getElementById('password').value = data.password || '';
+      document.getElementById('about').value = data.about || '';
+    } else {
+      console.log('User not found.');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Failed to load user profile. Please try again later.');
+  });
+  document.getElementById('username').placeholder = data.username || '';
+  document.getElementById('about').placeholder = data.about || '';
+  document.getElementById('update-profile').addEventListener('click', function() {
+    const username = document.getElementById('username').value;
+    const about = document.getElementById('about').value;
 
+    if (!username || !rating || !about) {
+      alert('Please fill in all fields');
+      return;
+    }
 
+    fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        "x-apikey": APIKEY2,
+        "cache-control": "no-cache"
+      },
+      body: JSON.stringify({ username, rating, about })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Updated user:', data);
+      alert('Profile updated successfully');
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Failed to update profile. Please try again later.');
+    });
+  });
+}
 
 // feedback.html
-document.getElementById('submit-feedback').addEventListener('click', function () {
-  var fbkCat = document.getElementById('fbk-cat').value.trim(); // Trim whitespace
-  var fbkDesc = document.getElementById('fbk-desc').value.trim(); // Trim whitespace
+function feedback() {
+  const feedbackButton = document.getElementById('submit-feedback');
+  const feedbackInput = document.getElementById('fbk-desc');
+  const feedbackCat = document.getElementById('fbk-cat');
 
-  // Validate inputs
-  if (!fbkCat || !fbkDesc) {
-    alert('Please fill in all fields');
-    return; // Stop execution if validation fails
+  if (!feedbackButton || !feedbackInput || !feedbackCat) {
+    console.error('Error: Required elements not found');
+    return;
   }
 
-  // Call the feedback function
-  feedback(fbkCat, fbkDesc);
-});
+  feedbackButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+    alert('Fed');
 
-function feedback(fbkCat, fbkDesc) {
-  // Prepare the data to be sent
-  let jsondata = {
-    userid: localStorage.getItem('userid'),
-    feedbackcat: fbkCat,
-    detail: fbkDesc,
-    status: 'Pending',
-  };
+    const feedbackText = feedbackInput.value.trim();
+    const feedbackCategory = feedbackCat.value;
 
-  // Define fetch settings
-  let settings = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-apikey': APIKEY2,
-      'cache-control': 'no-cache',
-    },
-    body: JSON.stringify(jsondata),
-  };
+    // Validate feedback input
+    if (!feedbackText) {
+      alert('Please enter your feedback before submitting.');
+      return;
+    }
 
-  // Log the request payload
-  console.log('Sending request with payload:', jsondata);
+    // Prepare JSON data for the API request
+    const jsondata = {
+      userid: localStorage.getItem('userid'),
+      detail: feedbackText,
+      feedbackcat: feedbackCategory,
+      status: "Pending"
+    };
 
-  // Send the feedback data to the server
-  fetch('https://mokesell3-33ea.restdb.io/rest/feedback', settings)
-    .then((response) => {
-      console.log('Response status:', response.status); // Log the response status
-      if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log('Feedback submitted successfully:', data);
-      // Redirect to userprofile.html after successful submission
-      window.location.href = 'userprofile.html';
-    })
-    .catch((error) => {
-      console.error('There was a problem with the fetch operation:', error);
-      alert('Failed to submit feedback. Please try again.'); // Notify the user
-    });
+    // API request settings
+    const settings = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "x-apikey": APIKEY2,
+        "cache-control": "no-cache"
+      },
+      body: JSON.stringify(jsondata)
+    };
+
+    console.log('Submitting feedback:', jsondata); // Debugging: Log the feedback data
+
+    // Make the API request
+    fetch("https://mokesell3-33ea.restdb.io/rest/feedback", settings)
+      .then(response => {
+        console.log('API response:', response); // Debugging: Log the response
+        if (!response.ok) {
+          throw new Error(`Network response was not ok. Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Feedback submitted successfully:', data); // Debugging: Log the success response
+        alert('Feedback submitted successfully');
+        feedbackInput.value = ''; // Clear the feedback input field
+      })
+      .catch(error => {
+        console.error('Error submitting feedback:', error); // Debugging: Log the error
+        alert('Failed to submit feedback. Please try again.');
+      });
+  });
+}
 
   
 //Search function
