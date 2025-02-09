@@ -38,31 +38,31 @@ Overall, these colors create a natural and stylish look, ideal for a lifestyle-f
 
 ## Features
 
-### Login/Sign up
-Allows users to create a new account or log into their existing account to sell or buy items.
+### Existing Features
 
-### Categories Feature
-Filters listings by category, making it easier for users to find items within specific sections.
+- **Login/Sign up** - Allows users to create a new account or log into their existing account to sell or buy items.
+- **Categories Feature** - Filters listings by category, making it easier for users to find items within specific sections.
+- **Favourites Feature** - Enables users to like and save listings for later viewing.
+- **Create Listing** - Allows sellers to create a listing with images, descriptions, and pricing to sell their items.
+- **Feedback Feature** - Enables users to submit feedback, whether it be a complaint or a feature request.
 
-### Favourites Feature
-Enables users to like and save listings for later viewing.
+### Features Left to Implement
 
-### Create Listing
-Allows sellers to create a listing with images, descriptions, and pricing to sell their items.
-
-### Feedback Feature
-Enables users to submit feedback, whether it be a complaint or a feature request.
-
----
-
-### How to Use
-1. **Sign up/Login** - Create an account or log in.
-2. **Browse/Search Items** - Use the search bar or categories to find products.
-3. **Like Items** - Save favorite items for later.
-4. **Sell Items** - Create listings with photos and descriptions.
-5. **Chat & Engage** - Communicate with other users via real-time chat.
+- **Advanced Search Filters** - Allow users to refine searches using price range, location, and condition filters.
+- **User Ratings & Reviews** - Implement a rating system for buyers and sellers to enhance trust.
+- **Secure Payment Integration** - Provide an in-app payment option for seamless transactions.
 
 ---
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Technologies Used
+
+- **[jQuery](https://jquery.com/)** - Simplifies DOM manipulation.
+- **HTML** - Used for structuring the website.
+- **CSS** - Used for designing the website.
+- **JavaScript** - Adds interactivity and functionality to the website.
+- **[restdb.io](https://restdb.io/)** - Holds our data in a NoSQL database.
+- **[Postman](https://www.postman.com/)** - Used for testing and reading our restdb.io data.
+- **[Bootstrap](https://getbootstrap.com/)** - Provides a responsive design template for better UI/UX.
+
+---
+
