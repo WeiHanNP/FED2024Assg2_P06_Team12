@@ -63,6 +63,7 @@ Overall, these colors create a natural and stylish look, ideal for a lifestyle-f
 - **[restdb.io](https://restdb.io/)** - Holds our data in a NoSQL database.
 - **[Postman](https://www.postman.com/)** - Used for testing and reading our restdb.io data.
 - **[Bootstrap](https://getbootstrap.com/)** - Provides a responsive design template for better UI/UX.
+![WhatsApp Image 2025-02-10 at 00 20 55_a8dfd1ac](https://github.com/user-attachments/assets/3e895204-7789-4b1e-86a6-b02e91cc7096)
 
 ---
 
