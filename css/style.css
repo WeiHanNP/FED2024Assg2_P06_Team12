@@ -422,3 +422,8 @@ body {
   background: #f8f9fa;
   border-left: 4px solid #007bff;
 }
+
+.center{
+  margin-left: auto; 
+  margin-right: auto; 
+}
