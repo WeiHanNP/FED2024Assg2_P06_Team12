@@ -1,0 +1,175 @@
+[
+    {
+        "_id": "67a2cc85390b9f3900013466",
+        "catid": "FA",
+        "category": "Fashion",
+        "_created": "2025-02-05T02:27:17.187Z",
+        "_changed": "2025-02-05T02:27:35.078Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 1
+      },
+      
+      {
+        "_id": "67a2ccb6390b9f3900013469",
+        "catid": "ET",
+        "category": "Electronics",
+        "_created": "2025-02-05T02:28:06.671Z",
+        "_changed": "2025-02-05T02:28:06.671Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+
+      {
+        "_id": "67a2ccda390b9f390001346b",
+        "catid": "HK",
+        "category": "Home & Kitchen",
+        "_created": "2025-02-05T02:28:42.066Z",
+        "_changed": "2025-02-05T02:28:42.066Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+
+      {
+        "_id": "67a2cce8390b9f390001346d",
+        "catid": "BP",
+        "category": "Beauty & Personal Care",
+        "_created": "2025-02-05T02:28:56.711Z",
+        "_changed": "2025-02-05T02:28:56.711Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+
+      {
+        "_id": "67a2ccf4390b9f390001346f",
+        "catid": "HW",
+        "category": "Health & Wellness",
+        "_created": "2025-02-05T02:29:08.014Z",
+        "_changed": "2025-02-05T02:29:20.114Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 1
+      },
+
+      {
+        "_id": "67a2cd0e390b9f3900013472",
+        "catid": "TG",
+        "category": "Toys & Games",
+        "_created": "2025-02-05T02:29:34.666Z",
+        "_changed": "2025-02-05T02:29:34.666Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+
+      {
+        "_id": "67a2cd96390b9f3900013474",
+        "catid": "SO",
+        "category": "Sports & Outdoors",
+        "_created": "2025-02-05T02:31:50.274Z",
+        "_changed": "2025-02-05T02:32:01.910Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 1
+      },
+
+      {
+        "_id": "67a2cdd9390b9f390001347c",
+        "catid": "AU",
+        "category": "Automotive",
+        "_created": "2025-02-05T02:32:57.563Z",
+        "_changed": "2025-02-05T02:32:57.563Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+
+      {
+        "_id": "67a2cdcf390b9f390001347a",
+        "catid": "BS",
+        "category": "Books & Stationery",
+        "_created": "2025-02-05T02:32:47.488Z",
+        "_changed": "2025-02-05T02:32:47.488Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+
+      {
+        "_id": "67a2cde2390b9f390001347e",
+        "catid": "PS",
+        "category": "Pet Supplies",
+        "_created": "2025-02-05T02:33:06.406Z",
+        "_changed": "2025-02-05T02:33:06.406Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+
+      {
+        "_id": "67a2cdeb390b9f3900013480",
+        "catid": "GR",
+        "category": "Groceries",
+        "_created": "2025-02-05T02:33:15.363Z",
+        "_changed": "2025-02-05T02:33:15.363Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+
+      {
+        "_id": "67a2cdf6390b9f3900013482",
+        "catid": "BA",
+        "category": "Baby Products",
+        "_created": "2025-02-05T02:33:26.132Z",
+        "_changed": "2025-02-05T02:33:26.132Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+
+      {
+        "_id": "67a2ce00390b9f3900013484",
+        "catid": "AC",
+        "category": "Arts & Crafts",
+        "_created": "2025-02-05T02:33:36.353Z",
+        "_changed": "2025-02-05T02:33:36.353Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+      {
+        "_id": "67a2ce09390b9f3900013486",
+        "catid": "DP",
+        "category": "Digital Products",
+        "_created": "2025-02-05T02:33:45.710Z",
+        "_changed": "2025-02-05T02:33:45.710Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+      {
+        "_id": "67a2ce13390b9f3900013488",
+        "catid": "SS",
+        "category": "Specialty Stores",
+        "_created": "2025-02-05T02:33:55.266Z",
+        "_changed": "2025-02-05T02:33:55.266Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      },
+      {
+        "_id": "67a2ce2c390b9f390001348a",
+        "catid": "OT",
+        "category": "Others",
+        "_created": "2025-02-05T02:34:20.877Z",
+        "_changed": "2025-02-05T02:34:20.877Z",
+        "_createdby": "s10228059@connect.np.edu.sg",
+        "_changedby": "s10228059@connect.np.edu.sg",
+        "_version": 0
+      }
+
+]

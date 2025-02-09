@@ -3,7 +3,8 @@ const APIKEY2 = "67a70fe2ecf91b27b74d1173";//for member
 const APIKEY2URLMEMBER = "https://mokesell3-33ea.restdb.io/rest/member" //for member
 const APIKEY3 = "67a728794d87449d37828004"
 const APIKEY3URL = "https://mokesell-9086.restdb.io/rest/listing"
-let memberdataList = [];
+const APIKEY4 = "67a825953c2ab936526e0dbd"
+const APIKEY4URL = "https://mokesell4-bf40.restdb.io/rest/listing"
 
 // userinfo for top of the page
 document.addEventListener('DOMContentLoaded', function () {
@@ -53,31 +54,27 @@ function limitText(text, limit) {
 document.addEventListener('DOMContentLoaded', function() {
   if (window.location.pathname.includes('index.html')) {
     loadindexlistings();
-    
   }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
   if (window.location.pathname.includes('listing.html')) {
     loadListings();
     load_category();
     //localStorage.removeItem('userSelectedCat');
   }
-});
-//load userprofile
-document.addEventListener('DOMContentLoaded', function() {
   if (window.location.pathname.includes('userprofile.html')) {
-    alert("userprofile");
-    userProfile();
+    if (localStorage.getItem('userid')) {
+      userProfile();
+    } else {
+      window.location.href = 'login.html';
+    }
   }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
   if (window.location.pathname.includes('sellerprofile.html')) {
+    loadSellerProfile();  
     sellerProfiles();
   }
+  if (window.location.pathname.includes('favorite.html')) {
+    loadFavoriteListings();
+  }
 });
-
 
 function load_category() {
   fetch("https://mokesell1-2729.restdb.io/rest/category", {
@@ -143,11 +140,11 @@ function load_category() {
 
 function loadListings() {
   const selectedCat = localStorage.getItem('userSelectedCat');
-  fetch("https://mokesell1-2729.restdb.io/rest/listing", {
+  fetch(APIKEY4URL, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      "x-apikey": APIKEY,
+      "x-apikey": APIKEY4,
       "cache-control": "no-cache"
     }
   })
@@ -211,34 +208,12 @@ function loadListings() {
   });
 
   // Clear the selected category from localStorage after use
-  //localStorage.removeItem('userSelectedCat');
+  // localStorage.removeItem('userSelectedCat');
 }
 
 // Helper function to limit text length
 function limitText(text, limit) {
   return text.length > limit ? text.substring(0, limit) + '...' : text;
-}
-
-
-//get member data function
-function getMemberData(userid) {
-  return fetch(`${APIKEY2URLMEMBER}/${userid}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      "x-apikey": APIKEY2,
-      "cache-control": "no-cache"
-    }
-  })
-  .then(response => response.json())
-  .then(data => {
-
-    memberdataList = [data._id,data.username,liked,followed,rating,about]
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    throw error;
-  });
 }
 
 function chooseCat(catid){
@@ -251,8 +226,6 @@ function chooseCat(catid){
   //alert(userSelectedCat);
 
 }
-
-
 
 // start of login and signup pages
 
@@ -359,7 +332,13 @@ function login(username, password) {
         alert('Logged in');
         let userid = user._id;
         let serverUsername = user.username;
+        localStorage.setItem('likedProducts', JSON.stringify(user.liked));
+        alert(user.liked);
+        localStorage.setItem('followedUsers', JSON.stringify(user.followed));
+        localStorage.setItem('userRating', user.rating);
+        localStorage.setItem('userAbout', user.about);
         loggedIn(userid, serverUsername);
+        
         userFound = true;
       }
     });
@@ -373,10 +352,15 @@ function login(username, password) {
 
 //save the user to the local storage
 function loggedIn(userid,username) {
+  
   localStorage.setItem('userid', userid);
   localStorage.setItem('username', username);
   // alert(userid);
   // alert(username);
+  document.querySelectorAll('body > *:not(#lottie-container)').forEach(element => {
+    element.style.display = 'none';
+  });
+  document.getElementById('lottie-container').style.display = 'block';
   window.location.href = 'index.html';
 }
 // end of login and signup pages
@@ -414,27 +398,25 @@ if (window.innerWidth < 576) {
 
 
 //index page
-
 function loadindexlistings() {
-  console.log('Loading listings...');
-
-  fetch("https://mokesell1-2729.restdb.io/rest/listing", {
+  console.log('Fetching data from:', APIKEY4URL); // Debugging: Log the API URL
+  fetch(APIKEY4URL, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      "x-apikey": APIKEY,
+      "x-apikey": APIKEY4,
       "cache-control": "no-cache"
     }
   })
   .then(response => {
-    console.log('Response:', response);
+    console.log('Response:', response); // Debugging: Log the response
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error(`Network response was not ok. Status: ${response.status}`);
     }
     return response.json();
   })
   .then(data => {
-    console.log('API Data:', data);
+    console.log('API Data:', data); // Debugging: Log the data received
 
     const productDiv = document.getElementById('index-card-container');
     if (!productDiv) {
@@ -443,7 +425,7 @@ function loadindexlistings() {
     }
     productDiv.innerHTML = '';
 
-    if (data.length === 0) {
+    if (!data || data.length === 0) {
       productDiv.innerHTML = '<div class="alert alert-info">No listings found.</div>';
       return;
     }
@@ -451,8 +433,11 @@ function loadindexlistings() {
     let row;
     let displayedProductCount = 0;
 
+    // Ensure memberdataList is defined and contains liked product IDs
+    const memberdataList = JSON.parse(localStorage.getItem('likedProducts')) || [];
+
     data.forEach((product) => {
-      console.log('Product:', product);
+      console.log('Product:', product); // Debugging: Log each product
 
       if (displayedProductCount % 4 === 0) {
         row = document.createElement('div');
@@ -463,16 +448,19 @@ function loadindexlistings() {
       const col = document.createElement('div');
       col.className = 'col-lg-3 col-md-6 mb-4';
       col.innerHTML = `<div class="card h-100">
-            <img src="${product.photourl}" class="card-img-top" alt="${product.name}" style="height: 150px; object-fit: cover;">
+            <img src="${product.photourl}" class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
             <div class="card-body">
               <h5 class="card-title">${product.name}</h5>
               <p class="card-text">$${product.listprice}</p>
               <p class="card-text">${limitText(product.description, 100)}</p>
               <p class="card-text">Condition: ${product.condition}</p>
               <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
-              <button id="like-${product._id}" class="btn btn-primary btn-sm">Like</button>
-              <button id="view-${product._id}" class="btn btn-primary btn-sm">View</button>
 
+              <button id="like-${product._id}" class="btn btn-primary btn-sm like-button" data-product-id="${product._id}">
+                ${memberdataList.includes(product._id) ? 'Liked' : 'Like'}
+              </button>
+
+              <button id="view-${product._id}" class="btn btn-primary btn-sm">View</button>
             </div>
           </div>`;
 
@@ -480,14 +468,54 @@ function loadindexlistings() {
       displayedProductCount++;
     });
 
+    // Add event listeners for like buttons
     document.querySelectorAll('.like-button').forEach(button => {
       button.addEventListener('click', function() {
         this.innerHTML = 'Liked';
+        const productId = this.getAttribute('data-product-id'); // Get product ID
+        const userid = localStorage.getItem('userid');
+        if (userid) {
+          fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              "x-apikey": APIKEY2,
+              "cache-control": "no-cache"
+            }
+          })
+          .then(response => response.json())
+          .then(user => {
+            if (user) {
+              let liked = user.liked || [];
+              if (!liked.includes(productId)) {
+                liked.push(productId);
+
+                fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+                  method: 'PUT',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    "x-apikey": APIKEY2,
+                    "cache-control": "no-cache"
+                  },
+                  body: JSON.stringify({ liked: liked })
+                })
+                .then(response => response.json())
+                .then(updatedUser => {
+                  console.log('Updated user:', updatedUser);
+                  // Update localStorage with the new liked products
+                  localStorage.setItem('likedProducts', JSON.stringify(liked));
+                })
+                .catch(error => console.error('Error:', error));
+              }
+            }
+          })
+          .catch(error => console.error('Error:', error));
+        }
       });
     });
   })
   .catch(error => {
-    console.error('Error:', error);
+    console.error('Error:', error); // Debugging: Log the error
     const productDiv = document.getElementById('index-card-container');
     if (productDiv) {
       productDiv.innerHTML = '<div class="alert alert-danger">Failed to load product listings.</div>';
@@ -506,28 +534,18 @@ function limitText(text, limit) {
 }
 
 
-
-
-//sellerprofile page
-// document.addEventListener('DOMContentLoaded', function() {
-//   if (window.location.pathname.includes('sellerprofile.html')) {
-//     loadSellerProfile();
-//   }
-// });
-
-
-// function loadSellerProfile() {
-//   let followButton = document.getElementById('follow-button');
-// followButton.addEventListener('click', function() {
-//     if (followButton.textContent === 'Follow') {
-//       followButton.textContent = 'Following';
-//       followButton.style.backgroundColor = 'grey';
-//     } else {
-//       followButton.textContent = 'Follow';
-//       followButton.style.backgroundColor = ''; // Reset to default
-//     }
-//   });
-// }
+function loadSellerProfile() {
+  let followButton = document.getElementById('follow-button');
+followButton.addEventListener('click', function() {
+    if (followButton.textContent === 'Follow') {
+      followButton.textContent = 'Following';
+      followButton.style.backgroundColor = 'grey';
+    } else {
+      followButton.textContent = 'Follow';
+      followButton.style.backgroundColor = ''; // Reset to default
+    }
+  });
+}
 
 
 //userprofile.html
@@ -736,19 +754,227 @@ function loadListing(sellerid) {
     document.getElementById('card-container').innerHTML = '<p>Failed to load listings. Please try again later.</p>';
   });
 }
+//favorite page
+
+function loadFavoriteListings() {
+  const userid = localStorage.getItem('userid');
+  if (!userid) {
+    console.error('Error: User ID not found in localStorage');
+    return;
+  }
+
+  console.log('Fetching user data from:', `${APIKEY2URLMEMBER}/${userid}`); // Debugging: Log the API URL
+  fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY2,
+      "cache-control": "no-cache"
+    }
+  })
+  .then(response => {
+    console.log('User data response:', response); // Debugging: Log the response
+    if (!response.ok) {
+      throw new Error(`Network response was not ok. Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(user => {
+    if (!user) {
+      console.error('Error: User data not found');
+      return;
+    }
+
+    const liked = user.liked || [];
+    if (liked.length === 0) {
+      console.log('No liked products found for the user.');
+      const productDiv = document.getElementById('card-container');
+      if (productDiv) {
+        productDiv.innerHTML = '<div class="alert alert-info">No favorite listings found.</div>';
+      }
+      return;
+    }
+
+    console.log('Fetching all listings from:', `https://mokesell1-2729.restdb.io/rest/listing`); // Debugging: Log the API URL
+    fetch(`https://mokesell1-2729.restdb.io/rest/listing`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        "x-apikey": APIKEY,
+        "cache-control": "no-cache"
+      }
+    })
+    .then(response => {
+      console.log('Listings response:', response); // Debugging: Log the response
+      if (!response.ok) {
+        throw new Error(`Network response was not ok. Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(listings => {
+      if (!listings || listings.length === 0) {
+        console.error('Error: No listings found');
+        return;
+      }
+
+      const productDiv = document.getElementById('card-container');
+      if (!productDiv) {
+        console.error('Error: card-container not found');
+        return;
+      }
+      productDiv.innerHTML = ''; // Clear previous listings
+
+      let row;
+      let displayedProductCount = 0;
+
+      liked.forEach(likedId => {
+        const likedProduct = listings.find(product => product._id === likedId);
+        if (likedProduct) {
+          if (displayedProductCount % 4 === 0) {
+            row = document.createElement('div');
+            row.className = 'row';
+            productDiv.appendChild(row);
+          }
+
+          const col = document.createElement('div');
+          col.className = 'col-lg-3 col-md-6 mb-4';
+          col.innerHTML = `<div class="card h-100">
+              <img src="${likedProduct.photourl}" class="card-img-top" alt="${likedProduct.name}" style="height: 250px; object-fit: cover;">
+              <div class="card-body">
+                <h5 class="card-title">${likedProduct.name}</h5>
+                <p class="card-text">$${likedProduct.listprice}</p>
+                <p class="card-text">${limitText(likedProduct.description, 100)}</p>
+                <p class="card-text">Condition: ${likedProduct.condition}</p>
+                <p class="card-text"><small class="text-muted">${likedProduct.listdatetime}</small></p>
+                <button id="like-${likedProduct._id}" class="btn btn-primary btn-sm like-button" data-product-id="${likedProduct._id}">Liked</button>
+                <button id="view-${likedProduct._id}" class="btn btn-primary btn-sm view-button" data-seller-id="${likedProduct.sellerid}">View</button>
+              </div>
+            </div>`;
+
+          row.appendChild(col);
+          displayedProductCount++;
+        }
+      });
+
+      // Add event listeners for like and view buttons using event delegation
+      productDiv.addEventListener('click', function(event) {
+        const likeButton = event.target.closest('.like-button');
+        const viewButton = event.target.closest('.view-button');
+
+        if (likeButton) {
+          const productId = likeButton.getAttribute('data-product-id');
+          fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              "x-apikey": APIKEY2,
+              "cache-control": "no-cache"
+            }
+          })
+          .then(response => response.json())
+          .then(user => {
+            if (user) {
+              let liked = user.liked || [];
+              if (liked.includes(productId)) {
+                liked = liked.filter(id => id !== productId);
+                likeButton.innerHTML = 'Like';
+              } else {
+                liked.push(productId);
+                likeButton.innerHTML = 'Liked';
+              }
+
+              fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                  "x-apikey": APIKEY2,
+                  "cache-control": "no-cache"
+                },
+                body: JSON.stringify({ liked: liked })
+              })
+              .then(response => response.json())
+              .then(updatedUser => {
+                console.log('Updated user:', updatedUser);
+                localStorage.setItem('likedProducts', JSON.stringify(liked));
+              })
+              .catch(error => console.error('Error:', error));
+            }
+          })
+          .catch(error => console.error('Error:', error));
+        }
+
+        if (viewButton) {
+          const sellerId = viewButton.getAttribute('data-seller-id');
+          localStorage.setItem('sellerid', sellerId);
+          window.location.href = 'sellerprofile.html';
+        }
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching listings:', error);
+      const productDiv = document.getElementById('card-container');
+      if (productDiv) {
+        productDiv.innerHTML = '<div class="alert alert-danger">Failed to load listings.</div>';
+      }
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching user data:', error);
+    const productDiv = document.getElementById('card-container');
+    if (productDiv) {
+      productDiv.innerHTML = '<div class="alert alert-danger">Failed to load user data.</div>';
+    }
+  });
+}
 
 
+//bump page
+function bumpagelist(listingID){
+  fetch("https://mokesell1-2729.restdb.io/rest/listing", {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY,
+      "cache-control": "no-cache"
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    const matchedListing = data.find(listing => listing._id === listingID);
+    if (matchedListing) {
+      const listingDiv = document.getElementById('container');
+      listingDiv.innerHTML = `
+        <div class="card split" style="width: 30rem;">
+            <img src="${matchedListing.photourl}" class="card-img-top" alt="${matchedListing.name}">
+            <div class="card-body">
+            <h5 class="card-title">"${matchedListing.name}"</h5>
+            <p class="card-text">$"${matchedListing.listprice}" <br><br>
+                Condition: ${matchedListing.condition} <br><br>
+                Category: ${matchedListing.category} <br><br>
+                Description: ${matchedListing.description}<br>
+            </p>
+            </div>
+        </div>`;
+    } else {
+      console.error('Listing not found.');
+    }
+  })
+  .catch(error => console.error('Error:', error));
+}
 
-// // // Call the function with the sellerid from localStorage
-// function sellerProfilePage() {
-//   document.addEventListener('DOMContentLoaded', () => {
-//     profile();
-//     let sellerid = localStorage.getItem('sellerid');
-//     if (sellerid) {
-//       loadListing(sellerid);
-//     }
-//   });
-// }
+
+// // Call the function with the sellerid from localStorage
+function sellerProfilePage() {
+  document.addEventListener('DOMContentLoaded', () => {
+    profile();
+    let sellerid = localStorage.getItem('sellerid');
+    if (sellerid) {
+      loadListing(sellerid);
+    }
+  });
+}
+
+
 
 
 //Initial check
