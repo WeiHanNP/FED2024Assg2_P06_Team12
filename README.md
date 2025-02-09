@@ -66,3 +66,29 @@ Overall, these colors create a natural and stylish look, ideal for a lifestyle-f
 
 ---
 
+## 
+
+---
+
+## Credits
+- **[User profile](https://bbbootstrap.com/snippets/bootstrap-sidebar-user-profile-62301382)**
+- **["Bump" annimation](https://lottiefiles.com/free-animation/bulkbump-icon-150x150-6Tw6NuiRQb)**
+- **["Create listing" animation](https://lottiefiles.com/free-animation/create-web-pxRCy73KkW)**
+- **["Favourite list" animation](https://lottiefiles.com/free-animation/added-to-favourite-yiEN0NoQbO)**
+
+note: words in "" are the prompt
+
+---
+
+## Media
+The photos used in this site were obtained from:
+- **[Bicycle listing](https://www.carousell.sg/p/foldable-bicycle-1349529111/?t-id=v_BfQA2Oa9_1736929626038&t-referrer=category_homescreen&t-referrer_browse_type=trending&t-referrer_page_type=homepage&t-referrer_request_id=b8SU7cbPo3AZc6RY&t-referrer_source=homepage)**
+- **[Crochet Red & Pink Heart-Shaped Bouquet listing](https://www.carousell.sg/p/%E3%80%90valentine%E2%80%99s-day%E3%80%91crochet-red-pink-heart-shaped-flowers-bouquet-1344828258/?t-id=v_BfQA2Oa9_1736929626038&t-referrer_browse_type=seller&t-referrer_page_type=profile&t-referrer_request_id=rFwrCfyZ1H1eruQo&t-tap_index=1)**
+- **[Thrifted satin blouse listing](https://www.carousell.sg/p/thrifted-satin-blouse-1335946114/?t-id=v_BfQA2Oa9_1736929626038&t-referrer_browse_type=search_results&t-referrer_page_type=search&t-referrer_request_id=H0gOfQMAKRnze8MI&t-referrer_search_query=satin%20blouse&t-referrer_search_query_source=ss_dropdown&t-referrer_sort_by=popular&t-tap_index=38)**
+- **[Chinese and English books bundle listing](https://www.carousell.sg/p/chinese-and-english-books-bundle-1350905503/?_branch_match_id=1336137529690192879&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXT04syi8tTs3J0UssKNDLyczL1ndJcQ7Ot6zM8wpMsq8rSk1LLSrKzEuPTyrKLy9OLbJ1TUlPBQBEnbG0PgAAAA%3D%3D&utm_campaign=share-listing&utm_medium=sharing&utm_source=share-copy-link)**
+- **[Seagate 500Gb Hard drive listing](https://www.carousell.sg/p/seagate-500gb-2-5-inch-hard-drive-1325720682/?t-id=v_BfQA2Oa9_1736929626038&t-referrer_browse_type=search_results&t-referrer_page_type=search&t-referrer_request_id=wt_0HUidI8tPYJDQ&t-referrer_search_query=Hard%20drive%20500gb&t-referrer_search_query_source=direct_search&t-referrer_sort_by=popular&t-tap_index=11)**
+
+---
+
+## Acknowledgements
+We received inspiration for this project from Carousell
