@@ -1,10 +1,14 @@
-const APIKEY = "6793b4d81128e05c4b6abe6c";
-const APIKEY2 = "67a70fe2ecf91b27b74d1173";//for member
-const APIKEY2URLMEMBER = "https://mokesell3-33ea.restdb.io/rest/member" //for member
-const APIKEY3 = "67a728794d87449d37828004"
-const APIKEY3URL = "https://mokesell-9086.restdb.io/rest/listing"
-const APIKEY4 = "67a825953c2ab936526e0dbd"
-const APIKEY4URL = "https://mokesell4-bf40.restdb.io/rest/listing"
+// const APIKEY = "6793b4d81128e05c4b6abe6c";
+// const APIKEY2 = "67a70fe2ecf91b27b74d1173";//for member
+// const APIKEY2URLMEMBER = "https://mokesell3-33ea.restdb.io/rest/member" //for member
+// const APIKEY3 = "67a728794d87449d37828004"
+// const APIKEY3URL = "https://mokesell-9086.restdb.io/rest/listing"
+// const APIKEY4 = "67a825953c2ab936526e0dbd"
+// const APIKEY4URL = "https://mokesell4-bf40.restdb.io/rest/listing"
+
+
+const APIKEY = "67a8b8c599fb60a7dce983ea";
+const APIKEYURL = "https://mokesell5-7439.restdb.io/rest"
 
 // userinfo for top of the page
 document.addEventListener('DOMContentLoaded', function () {
@@ -86,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function load_category() {
-  fetch("https://mokesell1-2729.restdb.io/rest/category", {
+  fetch(`${APIKEYURL}/category`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -149,11 +153,11 @@ function load_category() {
 
 function loadListings() {
   const selectedCat = localStorage.getItem('userSelectedCat');
-  fetch(APIKEY4URL, {
+  fetch(`${APIKEYURL}/listing`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      "x-apikey": APIKEY4,
+      "x-apikey": APIKEY,
       "cache-control": "no-cache"
     }
   })
@@ -301,7 +305,7 @@ function signup(username,password) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      "x-apikey": APIKEY2,
+      "x-apikey": APIKEY,
       "cache-control": "no-cache"
     },
     body: JSON.stringify(jsondata),
@@ -311,7 +315,7 @@ function signup(username,password) {
     }
   };
 
-  fetch(APIKEY2URLMEMBER, settings)
+  fetch(`${APIKEYURL}/member`, settings)
   .then(respond => respond.json())
   .then(data => {
     console.log(data);
@@ -327,11 +331,11 @@ function signup(username,password) {
 // 3. loop through the users and check if the username and password match
 // 4. if they do, alert the user that they are logged in
 function login(username, password) {
-  fetch(APIKEY2URLMEMBER, {
+  fetch(`${APIKEYURL}/member`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      "x-apikey": APIKEY2,
+      "x-apikey": APIKEY,
       "cache-control": "no-cache"
     }
   })
@@ -410,24 +414,25 @@ if (window.innerWidth < 576) {
 
 //index page
 function loadindexlistings() {
-  console.log('Fetching data from:', APIKEY4URL); // Debugging: Log the API URL
-  fetch(APIKEY4URL, {
+  console.log('Fetching data from:', `${APIKEYURL}/listing`);
+
+  fetch(`${APIKEYURL}/listing`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      "x-apikey": APIKEY4,
+      "x-apikey": APIKEY,
       "cache-control": "no-cache"
     }
   })
   .then(response => {
-    console.log('Response:', response); // Debugging: Log the response
+    console.log('Response:', response);
     if (!response.ok) {
       throw new Error(`Network response was not ok. Status: ${response.status}`);
     }
     return response.json();
   })
   .then(data => {
-    console.log('API Data:', data); // Debugging: Log the data received
+    console.log('API Data:', data);
 
     const productDiv = document.getElementById('index-card-container');
     if (!productDiv) {
@@ -443,104 +448,78 @@ function loadindexlistings() {
 
     let row;
     let displayedProductCount = 0;
-
-    // Ensure memberdataList is defined and contains liked product IDs
+    const columnsPerRow = 4;
     const memberdataList = JSON.parse(localStorage.getItem('likedProducts')) || [];
 
-    data.forEach((product) => {
-      console.log('Product:', product); // Debugging: Log each product
+    data.forEach(product => {
+      console.log('Product:', product);
 
-      if (displayedProductCount % 4 === 0) {
+      if (displayedProductCount % columnsPerRow === 0) {
         row = document.createElement('div');
         row.className = 'row';
         productDiv.appendChild(row);
       }
-      
+
       const col = document.createElement('div');
       col.className = 'col-lg-3 col-md-6 mb-4';
-      col.innerHTML = `<div class="card h-100">
-
-            
-
-            <img src="${product.photourl}" class="card-img-top" alt="${product.name}" style="height: 40%; object-fit: cover;">
-
-            <div class="card-body">
-              <h5 class="card-title">${product.name}</h5>
-              <p class="card-text">$${product.listprice}</p>
-              <p class="card-text">${limitText(product.description, 100)}</p>
-              <p class="card-text">Condition: ${product.condition}</p>
-              <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
-
-              <button id="like-${product._id}" class="btn btn-primary btn-sm like-button" data-product-id="${product._id}">
-                ${memberdataList.includes(product._id) ? 'Liked' : 'Like'}
-              </button>
-
-              <button id="view-${product._id}" class="btn btn-primary btn-sm">View</button>
-            </div>
-          </div>`;
+      col.innerHTML = `
+        <div class="card h-100">
+          <img src="${product.photourl}" class="card-img-top" alt="${product.name}">
+          <div class="card-body">
+            <h5 class="card-title">${product.name}</h5>
+            <p class="card-text">$${product.listprice}</p>
+            <p class="card-text">${limitText(product.description, 100)}</p>
+            <p class="card-text">Condition: ${product.condition}</p>
+            <p class="card-text"><small class="text-muted">${product.listdatetime}</small></p>
+            <button id="like-${product._id}" class="btn btn-primary btn-sm like-button" data-product-id="${product._id}">
+              ${memberdataList.includes(product._id) ? 'Liked' : 'Like'}
+            </button>
+            <button id="view-${product._id}" class="btn btn-primary btn-sm">View</button>
+          </div>
+        </div>`;
 
       row.appendChild(col);
       displayedProductCount++;
-    });
 
-    // Add event listeners for like buttons
-    document.querySelectorAll('.like-button').forEach(button => {
-      button.addEventListener('click', function() {
-        this.innerHTML = 'Liked';
-        const productId = this.getAttribute('data-product-id'); // Get product ID
-        const userid = localStorage.getItem('userid');
-        if (userid) {
-          fetch(`${APIKEY2URLMEMBER}/${userid}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              "x-apikey": APIKEY2,
-              "cache-control": "no-cache"
-            }
-          })
-          .then(response => response.json())
-          .then(user => {
-            if (user) {
-              let liked = user.liked || [];
-              if (!liked.includes(productId)) {
-                liked.push(productId);
-
-                fetch(`${APIKEY2URLMEMBER}/${userid}`, {
-                  method: 'PUT',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    "x-apikey": APIKEY2,
-                    "cache-control": "no-cache"
-                  },
-                  body: JSON.stringify({ liked: liked })
-                })
-                .then(response => response.json())
-                .then(updatedUser => {
-                  console.log('Updated user:', updatedUser);
-                  // Update localStorage with the new liked products
-                  localStorage.setItem('likedProducts', JSON.stringify(liked));
-                })
-                .catch(error => console.error('Error:', error));
-              }
-            }
-          })
-          .catch(error => console.error('Error:', error));
-        }
+      // Add event listeners for like and view buttons
+      document.getElementById(`like-${product._id}`).addEventListener('click', () => {
+        handleLike(product._id);
+      });
+      document.getElementById(`view-${product._id}`).addEventListener('click', () => {
+        window.location.href = `/product-details.html?id=${product._id}`;
       });
     });
   })
   .catch(error => {
-    console.error('Error:', error); // Debugging: Log the error
+    console.error('Error fetching data:', error);
     const productDiv = document.getElementById('index-card-container');
     if (productDiv) {
-      productDiv.innerHTML = '<div class="alert alert-danger">Failed to load product listings.</div>';
+      productDiv.innerHTML = '<div class="alert alert-danger">Failed to load listings. Please try again later.</div>';
     }
   });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  loadindexlistings();
-});
+function handleLike(productId) {
+  let likedProducts = JSON.parse(localStorage.getItem('likedProducts')) || [];
+  if (likedProducts.includes(productId)) {
+    likedProducts = likedProducts.filter(id => id !== productId);
+  } else {
+    likedProducts.push(productId);
+  }
+  localStorage.setItem('likedProducts', JSON.stringify(likedProducts));
+  updateLikeButton(productId, likedProducts.includes(productId));
+}
+
+function updateLikeButton(productId, isLiked) {
+  const likeButton = document.getElementById(`like-${productId}`);
+  if (likeButton) {
+    likeButton.textContent = isLiked ? 'Liked' : 'Like';
+  }
+}
+
+function limitText(text, limit) {
+  return text.length > limit ? text.substring(0, limit) + '...' : text;
+}
 
 
 // Helper function to limit text length
@@ -574,11 +553,11 @@ function userProfile() {
   }
 
   // Fetch user data from the API
-  fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+  fetch(`${APIKEYURL}/member/${userid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      "x-apikey": APIKEY2,
+      "x-apikey": APIKEY,
       "cache-control": "no-cache"
     }
   })
@@ -613,11 +592,11 @@ function sellerProfiles() {
   let sellerid = localStorage.getItem('sellerid').trim();
   // alert(sellerid+"hehe");
   if (sellerid) {
-    fetch(`${APIKEY2URLMEMBER}/${sellerid}`, {
+    fetch(`${APIKEYURL}/member/${sellerid}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "x-apikey": APIKEY2,
+        "x-apikey": APIKEY,
         "cache-control": "no-cache"
       }
     })
@@ -642,11 +621,11 @@ function sellerProfiles() {
     let sellerid = localStorage.getItem('sellerid').trim();
 
     if (userid && sellerid) {
-      fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+      fetch(`${APIKEYURL}/member/${userid}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "x-apikey": APIKEY2,
+          "x-apikey": APIKEY,
           "cache-control": "no-cache"
         }
       })
@@ -657,11 +636,11 @@ function sellerProfiles() {
           if (!followed.includes(sellerid)) {
             followed.push(sellerid);
 
-            fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+            fetch(`${APIKEYURL}/member/${userid}`, {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',
-                "x-apikey": APIKEY2,
+                "x-apikey": APIKEY,
                 "cache-control": "no-cache"
               },
               body: JSON.stringify({ followed: followed })
@@ -695,7 +674,7 @@ function loadListing(sellerid) {
   }
 
   // Fetch listings from API
-  fetch("https://mokesell1-2729.restdb.io/rest/listing", {
+  fetch(`${APIKEYURL}/listing`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -777,12 +756,12 @@ function loadFavoriteListings() {
     return;
   }
 
-  console.log('Fetching user data from:', `${APIKEY2URLMEMBER}/${userid}`); // Debugging: Log the API URL
-  fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+  console.log('Fetching user data from:', `${APIKEYURL}/member/${userid}`); // Debugging: Log the API URL
+  fetch(`${APIKEYURL}/member/${userid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      "x-apikey": APIKEY2,
+      "x-apikey": APIKEY,
       "cache-control": "no-cache"
     }
   })
@@ -809,8 +788,8 @@ function loadFavoriteListings() {
       return;
     }
 
-    console.log('Fetching all listings from:', `https://mokesell1-2729.restdb.io/rest/listing`); // Debugging: Log the API URL
-    fetch(`https://mokesell1-2729.restdb.io/rest/listing`, {
+    
+    fetch(`${APIKEYURL}/listing`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -877,11 +856,11 @@ function loadFavoriteListings() {
 
         if (likeButton) {
           const productId = likeButton.getAttribute('data-product-id');
-          fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+          fetch(`${APIKEYURL}/member/${userid}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              "x-apikey": APIKEY2,
+              "x-apikey": APIKEY,
               "cache-control": "no-cache"
             }
           })
@@ -897,11 +876,11 @@ function loadFavoriteListings() {
                 likeButton.innerHTML = 'Liked';
               }
 
-              fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+              fetch(`${APIKEYURL}/member/${userid}`, {
                 method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json',
-                  "x-apikey": APIKEY2,
+                  "x-apikey": APIKEY,
                   "cache-control": "no-cache"
                 },
                 body: JSON.stringify({ liked: liked })
@@ -944,7 +923,7 @@ function loadFavoriteListings() {
 
 //bump page
 function bumpagelist(listingID){
-  fetch("https://mokesell1-2729.restdb.io/rest/listing", {
+  fetch(`${APIKEYURL}/listing`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -1030,7 +1009,7 @@ function createListing() {
         body: JSON.stringify(jsondata)
       };
 
-      fetch(APIKEY4URL, settings)
+      fetch(`${APIKEYURL}/listing`, settings)
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -1060,7 +1039,7 @@ function editProfile() {
     return;
   }
 
-  fetch(`https://mokesell1-2729.restdb.io/rest/member/${userid}`, {
+  fetch(`${APIKEYURL}/member/${userid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -1098,11 +1077,11 @@ function editProfile() {
       return;
     }
 
-    fetch(`${APIKEY2URLMEMBER}/${userid}`, {
+    fetch(`${APIKEYURL}/member/${userid}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "x-apikey": APIKEY2,
+        "x-apikey": APIKEY,
         "cache-control": "no-cache"
       },
       body: JSON.stringify({ username, rating, about })
@@ -1156,7 +1135,7 @@ function feedback() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "x-apikey": APIKEY2,
+        "x-apikey": APIKEY,
         "cache-control": "no-cache"
       },
       body: JSON.stringify(jsondata)
