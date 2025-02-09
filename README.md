@@ -1,6 +1,7 @@
 # FED2024Assg2_P06_Team12
+![Uploading download.png…]()
 
-# MokeSell
+# 🛍MokeSell🛒
 
 MokeSell is a dynamic online platform designed to serve as a consumer-to-consumer (Peer-to-Peer) marketplace where users can conveniently buy and sell both new and second-hand items. It provides a smooth experience for individuals looking to trade goods within a trusted community.
 
