@@ -121,6 +121,5 @@ We received inspiration for this project from Carousell
 ---
 
 ## Links
-- **[Github link :] (https://github.com/WeiHanNP/FED2024Assg2_P06_Team12)** https://github.com/WeiHanNP/FED2024Assg2_P06_Team12
-- **[Video link :](https://drive.google.com/file/d/11x13BVdgtbMJU8b4E3YFCtpS2xADfep-/view?usp=drivesdk)** https://drive.google.com/file/d/11x13BVdgtbMJU8b4E3YFCtpS2xADfep-/view?usp=drivesdk
-
+- **Github link: https://github.com/WeiHanNP/FED2024Assg2_P06_Team12**
+- **[Pitch video link](https://drive.google.com/file/d/11x13BVdgtbMJU8b4E3YFCtpS2xADfep-/view?usp=drivesdk)**
