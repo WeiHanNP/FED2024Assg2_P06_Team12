@@ -20,9 +20,6 @@ We focused on understanding our target audience to create a seamless experience 
 - **As a buyer**, I want to find things I need and/or like for a cheaper price. I would look up the item by the search bar or by category to find what I am looking for.
 - **As a seller**, I want to sell my things for money. I would make a listing and if necessary, purchase a bump to boost it.
 
-### ✂Wireframes & Mockups📎
-We have created wireframes and mockups to guide our design process. You can find these resources in the project directory or access them via the Adobe XD share link.
-
 ---
 
 ## Color Palette🎨
@@ -56,8 +53,6 @@ Overall, these colors create a natural and stylish look, ideal for a lifestyle-f
 ---
 
 ## Technologies Used💻
-
-- **[jQuery](https://jquery.com/)** - Simplifies DOM manipulation.
 - **HTML** - Used for structuring the website.
 - **CSS** - Used for designing the website.
 - **JavaScript** - Adds interactivity and functionality to the website.
@@ -122,3 +117,10 @@ The photos used in this site were obtained from:
 
 ## Acknowledgements
 We received inspiration for this project from Carousell
+
+---
+
+## Links
+- **[Github link :] (https://github.com/WeiHanNP/FED2024Assg2_P06_Team12)** https://github.com/WeiHanNP/FED2024Assg2_P06_Team12
+- **[Video link :](https://drive.google.com/file/d/11x13BVdgtbMJU8b4E3YFCtpS2xADfep-/view?usp=drivesdk)** https://drive.google.com/file/d/11x13BVdgtbMJU8b4E3YFCtpS2xADfep-/view?usp=drivesdk
+
